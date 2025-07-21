@@ -9,6 +9,29 @@ const styleActiveSubTab = "data-[state=active]:bg-transparent data-[state=active
 const HomePage = () => {
     return (
         <>
+            {/* Navbar */}
+            <nav className='bg-primary/30 flex justify-between p-3'>
+                <p ><span className='font-semibold'>Growthx</span> | Broker</p>
+                <Drawer direction='top'>
+                    <DrawerTrigger asChild>
+                        <Menu />
+                    </DrawerTrigger>
+                    <DrawerContent>
+                        <div className='bg-primary/30 flex justify-between p-3'>
+                            <p ><span className='font-semibold'>Growthx</span> | Broker</p>
+                            <DrawerClose asChild>
+                                <X />
+                            </DrawerClose>
+                        </div>
+                        <div className='bg-primary/30 py-7 flex flex-col items-center gap-2 text-lg'>
+                            <a>Home</a>
+                            <a>About</a>
+                            <a>Contact us</a>
+                            <a>Login</a>
+                        </div>
+                    </DrawerContent>
+                </Drawer>
+            </nav>
             <div className='py-4 px-3'>
                 {/* title */}
                 <h1 className='text-2xl font-extrabold tracking-tight'>Discover Lucrative Property <br /> Investments</h1>
@@ -113,6 +136,22 @@ const PropertyCard = () => {
     const styles = {
         tabStyle: 'text-slate-500 data-[state=active]:bg-primary/50 data-[state=active]:text-slate-800 text-xs'
     }
+
+    const message = `
+🏡 New Property Alert!
+https://growthx-broker-webview.vercel.app
+    
+Name: Aditri Everest
+Address: Ameenpur, Near Chandannagar , West  Bengal
+Status: Open for sale
+`;
+
+    const handleShare = () => {
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+        window.open(whatsappUrl, "_blank");
+    };
+
     return (<>
         <div className='p-3 border shadow-sm bg-slate-50/50'>
             <div className='flex gap-3'>
@@ -137,7 +176,7 @@ const PropertyCard = () => {
                         <><ChevronUp /> Show Less</>
                     }
                 </Button>
-                <Button variant={"outline"}><MessageSquareShare />Share on Whatsapp</Button>
+                <Button variant={"outline"} onClick={handleShare}><MessageSquareShare />Share on Whatsapp</Button>
             </div>
 
             {/* Hidden */}
@@ -202,7 +241,7 @@ import {
 } from "@/components/ui/table"
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Building2, ChartSpline, ChevronDown, ChevronUp, FileText, MessageSquareShare, NotebookTabs, Search, UserPlus, Users } from 'lucide-react';
+import { Building2, ChartSpline, ChevronDown, ChevronUp, FileText, Menu, MessageSquareShare, NotebookTabs, PackagePlus, Search, UserPlus, Users, X } from 'lucide-react';
 
 const leads: { l_id: string; name: string; ph: string; offer: number }[] = [
     { l_id: "1", name: "aditya", offer: 20003, ph: "8001677120" },

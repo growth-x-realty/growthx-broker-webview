@@ -1,10 +1,12 @@
-import { HomePage } from "./pages"
+import { HomePage, LoginPage, RegisterAgent } from "./pages"
 
 function App() {
 
   return (
     <>
-      <HomePage />
+      {/* <HomePage /> */}
+      <LoginPage />
+      {/* <RegisterAgent /> */}
     </>
   )
 }
