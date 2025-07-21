@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
+import { InputOTP, InputOTPSlot } from "@/components/ui/input-otp"
 import { Label } from "@/components/ui/label"
 import { ChevronLeft, MessageCircleCode } from "lucide-react"
 import { useState } from "react"
+import { useNavigate } from "react-router"
 
 const LoginPage = () => {
     const [count, setCount] = useState(1);
@@ -18,7 +19,7 @@ const LoginPage = () => {
     return (
         <>
             <div className="h-screen flex flex-col items-center justify-center bg-linear-to-b from-primary via-slate-50 to-white">
-                <div className="bg-white rounded-md border shadow-sm p-4">
+                <div className="bg-white rounded-lg border shadow-sm p-4">
                     <div className="text-center">
                         <p className="text-xl"><span className="font-semibold">Growthx </span> | Broker</p>
                         <p className="text-sm text-slate-600">Sign in to your account</p>
@@ -33,6 +34,10 @@ const LoginPage = () => {
 }
 
 const StepLogin = ({ next }: { next: () => void; prev: () => void; }) => {
+    const navigate = useNavigate();
+    const goToRegister = () => {
+        navigate("/register");
+    }
     return (<>
         <div className="pt-10 pb-6">
             <Label htmlFor="ph" className="pl-1 text-gray-800 pb-1 text-xs font-semibold">Enter your registered phone</Label>
@@ -41,11 +46,15 @@ const StepLogin = ({ next }: { next: () => void; prev: () => void; }) => {
 
         <div className="flex flex-col gap-3">
             <Button onClick={next}><MessageCircleCode />Get OTP on whatsapp</Button>
-            <Button variant={"secondary"}>Register as an Agent</Button>
+            <Button variant={"secondary"} onClick={goToRegister}>Register as an Agent</Button>
         </div>
     </>)
 }
 const StepOtp = ({ prev }: { next: () => void; prev: () => void; }) => {
+    const navigate = useNavigate();
+    const goToHome = () => {
+        navigate("/home");
+    }
     return (<>
         <div className="pt-10 pb-6">
             <Label htmlFor="otp" className="pl-1 text-gray-800 pb-1 text-xs font-semibold">Enter OTP</Label>
@@ -60,7 +69,7 @@ const StepOtp = ({ prev }: { next: () => void; prev: () => void; }) => {
         </div>
 
         <div className="flex flex-col gap-3">
-            <Button>Login</Button>
+            <Button onClick={goToHome}>Login</Button>
             <Button variant={"secondary"} onClick={prev}><ChevronLeft /> Edit Phone Number</Button>
         </div>
     </>)

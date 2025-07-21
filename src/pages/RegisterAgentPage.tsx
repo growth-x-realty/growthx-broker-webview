@@ -7,7 +7,7 @@ const RegisterAgent = () => {
     return (
         <>
             <div className="h-screen flex flex-col items-center justify-center bg-linear-to-b from-primary via-slate-50 to-white">
-                <div className="bg-white rounded-md border shadow-sm p-4">
+                <div className="bg-white rounded-lg border shadow-sm p-4">
                     <div className="text-center">
                         <p className="text-xl"><span className="font-semibold">Growthx </span> | Broker</p>
                         <p className="text-sm text-slate-600">Register as an Agent</p>

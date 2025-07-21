@@ -241,7 +241,7 @@ import {
 } from "@/components/ui/table"
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Building2, ChartSpline, ChevronDown, ChevronUp, FileText, Menu, MessageSquareShare, NotebookTabs, PackagePlus, Search, UserPlus, Users, X } from 'lucide-react';
+import { Building2, ChartSpline, ChevronDown, ChevronUp, FileText, Menu, MessageSquareShare, NotebookTabs, Search, UserPlus, Users, X } from 'lucide-react';
 
 const leads: { l_id: string; name: string; ph: string; offer: number }[] = [
     { l_id: "1", name: "aditya", offer: 20003, ph: "8001677120" },
