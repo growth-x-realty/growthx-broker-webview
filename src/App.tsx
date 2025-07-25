@@ -4,6 +4,11 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { Toaster } from "sonner";
 
 const router = createBrowserRouter([
   {
@@ -15,11 +20,16 @@ const router = createBrowserRouter([
   { path: "/register", element: <RegisterAgent /> },
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <Toaster richColors={true} position="top-center" />
+      </QueryClientProvider>
     </>
   )
 }
