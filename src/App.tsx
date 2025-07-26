@@ -1,4 +1,4 @@
-import { HomePage, LoginPage, RegisterAgent } from "./pages"
+import { DashboardPage, LoginPage, RegisterAgent } from "./pages"
 import {
   Navigate,
   RouterProvider,
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Navigate to="/login" replace />
   },
   { path: "/login", element: <LoginPage /> },
-  { path: "/home", element: <HomePage /> },
+  { path: "/home", element: <DashboardPage /> },
   { path: "/register", element: <RegisterAgent /> },
 ]);
 

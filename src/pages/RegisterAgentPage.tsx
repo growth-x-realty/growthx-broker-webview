@@ -2,7 +2,7 @@ import { request } from "@/apis/api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { apis, msgs } from "@/constants"
+import { apiParams, msgs } from "@/constants"
 import type { RequestBeBroker } from "@/types/request"
 import type { ErrorResponse, ResponseBeBroker } from "@/types/response"
 import { useMutation } from "@tanstack/react-query"
@@ -39,7 +39,7 @@ const RegisterAgent = () => {
 
     const mutateHandler = () => {
         if (!name || !phone) return;
-        requestBeBroker({ apiParam: apis.REQ_BROKER, body: { name, phone } });
+        requestBeBroker({ apiParam: apiParams.REQ_BROKER, body: { name, phone } });
     }
     return (
         <>

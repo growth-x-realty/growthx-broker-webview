@@ -1,4 +1,4 @@
-import type { apiParams } from '../types'
+import type { ApiParams } from '../types'
 
 export const nav = {
 
@@ -17,39 +17,39 @@ export const BASE_URL = "https://growthx-broker-backend-fvcrfvdaggd6f8dk.central
 
 
 
-export const apis = {
+export const apiParams = {
     REQ_BROKER: {
         url: BASE_URL + 'req-broker',
         method: "POST"
-    } as apiParams,
+    } as ApiParams,
     REQ_WH_OTP: {
         url: BASE_URL + 'req-wh-otp',
         method: "POST",
-    } as apiParams,
+    } as ApiParams,
     LOGIN: {
         url: BASE_URL + 'login',
         method: "POST"
-    } as apiParams,
+    } as ApiParams,
     ADD_LEAD: {
         url: BASE_URL + 'add-lead',
         method: "POST",
         auth: true
-    } as apiParams,
+    } as ApiParams,
     ADD_INTERESTED: {
         url: BASE_URL + 'add-interested',
         method: "POST",
         auth: true
-    } as apiParams,
+    } as ApiParams,
     ADD_LEAD_TO_PROPERTY: {
         url: BASE_URL + 'add-lead-to-property',
         method: "POST",
         auth: true
-    } as apiParams,
+    } as ApiParams,
     GET_DATA: {
         url: BASE_URL + 'get-data',
         method: "GET",
         auth: true
-    } as apiParams,
+    } as ApiParams,
 }
 
 export const msgs = {

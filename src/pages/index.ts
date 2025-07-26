@@ -1,5 +1,5 @@
-import HomePage from "./HomePage";
+import DashboardPage from "./DashboardPage";
 import LoginPage from "./LoginPage";
 import RegisterAgent from "./RegisterAgentPage";
 RegisterAgent
-export { HomePage, LoginPage, RegisterAgent }
+export { DashboardPage, LoginPage, RegisterAgent }

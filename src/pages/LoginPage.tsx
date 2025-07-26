@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query"
 import { ChevronLeft, MessageCircleCode } from "lucide-react"
 import { useState } from "react"
 import { useNavigate } from "react-router"
-import { apis, msgs } from '@/constants'
+import { apiParams, msgs } from '@/constants'
 import { toast } from "sonner"
 import type { RequestLoginWithOtp, RequestOtpWhatsapp } from "@/types/request"
 
@@ -54,7 +54,7 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
         }
     })
     const mutateHandler = () => {
-        requestOtpWhatsapp({ apiParam: apis.REQ_WH_OTP, body: { phone } });
+        requestOtpWhatsapp({ apiParam: apiParams.REQ_WH_OTP, body: { phone } });
     }
 
     return (<>
@@ -96,7 +96,7 @@ const StepOtp = ({ prev }: { next: () => void; prev: () => void; }) => {
     const mutateHandler = () => {
         if (!otp) return;
         const { hash, phone } = JSON.parse(window.localStorage.getItem('login') || "")
-        requestLogin({ apiParam: apis.LOGIN, body: { hash, phone, otp } });
+        requestLogin({ apiParam: apiParams.LOGIN, body: { hash, phone, otp } });
     }
 
 
