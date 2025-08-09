@@ -10,6 +10,7 @@ import {
 } from '@tanstack/react-query'
 import { Toaster } from "sonner";
 import { nav } from "./constants";
+import ContactUs from "./pages/ContactUsPage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
   { path: nav.login, element: <LoginPage /> },
   { path: nav.dashboard, element: <DashboardPage /> },
   { path: nav.register, element: <RegisterAgent /> },
+  { path: nav.contactus, element: <ContactUs /> },
+
 ]);
 
 const queryClient = new QueryClient();
