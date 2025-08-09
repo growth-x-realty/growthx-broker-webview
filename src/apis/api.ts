@@ -53,6 +53,7 @@ export async function request<REQ extends object, RES extends object>({
     body?: REQ;
 }): Promise<RES> {
     try {
+        console.log({ apiParam, body })
         const res = await fetch(`${apiParam.url}`, {
             method: apiParam.method,
             headers: makeHeader(apiParam.auth),

@@ -1,4 +1,4 @@
-import { BrokerDetails, ErrorType, Lead, Property, PropertyLead } from './types'
+import { ErrorType, Lead, Property, PropertyLead } from './types'
 
 export type SuccessResponse = {
     status: "success";
@@ -23,7 +23,7 @@ export interface ResponseOtpWhatsapp extends SuccessResponse {
 
 export interface ResponseLoginWithOtp extends SuccessResponse {
     token: string;
-    b_details: BrokerDetails
+    name: string;
 }
 
 export interface ResponseLoginLinkWhatsapp extends SuccessResponse {
@@ -41,7 +41,6 @@ export interface ResponseAdminLoginWithOtp extends SuccessResponse {
 export interface ResponseGetMyProperties extends SuccessResponse {
     properties: Property[]; // all the properties
     leads: Lead[]; // all the lead of "b_id"
-    propertyLead: PropertyLead[]; // all the PropertyLead where l_id is in leads of "b_id"
     intersted: string[]; // array of p_id from BrokerProperty where 'b_id'
 }
 
@@ -53,7 +52,8 @@ export interface ResponseAddLead extends SuccessResponse {
     l_id: string;
 }
 
-export interface ResponseAddLeadToProperty extends SuccessResponse {
+
+export interface ResponseLogout extends SuccessResponse {
 
 }
 

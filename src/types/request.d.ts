@@ -1,4 +1,4 @@
-import { BrokerDetails, LeadDetails, PropertyDetails, PropertyStatus, PropertyZones } from "./types";
+import { PropertyDetails, PropertyStatus, PropertyZones } from "./types";
 
 export interface Request { }
 /**
@@ -47,15 +47,14 @@ export interface RequestAddInteresed {
 }
 
 export interface RequestAddLead {
-    phone: string;
-    details: LeadDetails;
+    p_id: string;
+    name: string;
+    price: number;
 }
 
-export interface RequestAddLeadToProperty {
-    l_id: string; // "Lead" _id
-    p_id: string; // "Property" _id
+export interface RequestLogout {
+    all?: boolean;
 }
-
 //=====================================================================
 
 export interface AdminRequest extends Request {
@@ -69,7 +68,8 @@ export interface AdminRequest extends Request {
 export interface RequestAddBroker {
     b_phone: string;
     b_email: string;
-    b_details: BrokerDetails;
+    name: string;
+    addr?: string;
 }
 
 export interface RequestAddProperty {

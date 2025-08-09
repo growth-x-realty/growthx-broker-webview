@@ -7,6 +7,8 @@ import { useState } from "react";
 import { AddInterested } from "./AddInterested";
 import { AddLead } from "./AddLead";
 import { LeadTableOfProperty } from "./LeadTable";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 export const PropertyCard = ({ p_id }: { p_id: string }) => {
     const [hidden, setHidden] = useState(true);
@@ -21,13 +23,12 @@ export const PropertyCard = ({ p_id }: { p_id: string }) => {
     }
 
     const message = `
-🏡 New Property Alert!
-https://growthx-broker-webview.vercel.app
-    
-Name: Aditri Everest
-Address: Ameenpur, Near Chandannagar , West  Bengal
-Status: Open for sale
-`;
+    🏡 *New Property Alert!*
+        
+    *Name:* Aditri Everest
+    *Address:* Ameenpur, Near Chandannagar , West  Bengal
+    *Status:* _Open for sale_
+    `;
 
     const handleShare = () => {
         const encodedMessage = encodeURIComponent(message);
@@ -45,7 +46,7 @@ Status: Open for sale
                     <p className='text-green-500 text-sm font-semibold'>OPEN for sale</p>
                 </div>
             </div>
-            <p> <span className='text-sm  text-muted-foreground pl-1'>Expected Amount</span> <span className="italic text-sm font-semibold text-slate-600">65,00,000</span></p>
+            <p> <span className='text-sm  text-muted-foreground pl-1'>Expected Amount</span> <span className="italic text-sm font-semibold text-slate-600">100</span></p>
             <div className="flex justify-between">
                 <div className='py-1.5 pl-1'>
                     <p className='text-xs'><span className='font-semibold text-red-900'>15 Agents</span> shown interest</p>
@@ -62,7 +63,28 @@ Status: Open for sale
                         <><ChevronUp /> Show Less</>
                     }
                 </Button>
-                <Button variant={"outline"} onClick={handleShare}><MessageSquareShare />Share on Whatsapp</Button>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant={"outline"}><MessageSquareShare />Share on Whatsapp</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle className="text-slate-500">Whatsapp Message Preview</DialogTitle>
+                        </DialogHeader>
+
+                        <div className="p-4 border rounded-md bg-slate-100">
+                            <p>🏡 New Property Alert!</p>
+                            <br />
+                            <p>Name : {property.p_details.name} </p>
+                            <p>Address : {property.p_details.addr} </p>
+                            <p>Status: Open for sale</p>
+                        </div>
+
+                        <DialogFooter>
+                            <Button onClick={handleShare}><MessageSquareShare />Send</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
 
             {/* Hidden */}
@@ -81,8 +103,8 @@ Status: Open for sale
                                 <DrawerTrigger asChild>
                                     <Button className='mt-2'><UserPlus />Add New Lead</Button>
                                 </DrawerTrigger>
-                                <DrawerContent>
-                                    <AddLead p_id={p_id} />
+                                <DrawerContent aria-describedby="add lead">
+                                    <AddLead p_id={p_id} exp_price={100} />
                                 </DrawerContent>
                             </Drawer>
                         </TabsContent>

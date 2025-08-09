@@ -1,39 +1,36 @@
 import { request } from "@/apis/api";
 import { Button } from "@/components/ui/button";
 import { DrawerClose, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { apiParams } from "@/constants";
-import { useStoreLead, useStorePL } from "@/state/store";
-import type { RequestAddLead, RequestAddLeadToProperty } from "@/types/request";
-import type { ErrorResponse, ResponseAddLead, ResponseAddLeadToProperty } from "@/types/response";
+import { useStoreLead } from "@/state/store";
+import type { RequestAddLead } from "@/types/request";
+import type { ErrorResponse, ResponseAddLead } from "@/types/response";
 import { useMutation } from "@tanstack/react-query";
-import { CircleCheckBig, ClockFading, UserPlus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { CircleCheckBig, UserPlus } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
+import { InputField } from "../Input";
 
-export const AddLead = ({ p_id }: { p_id: string }) => {
-    const [step, setStep] = useState<"CHOOSE" | "EXISTING" | "NEW" | "FINAL">("NEW");
-    const [l_id, setL_id] = useState("");
+export const AddLead = ({ p_id, exp_price }: { p_id: string, exp_price: number }) => {
+    const [step, setStep] = useState<"NEW" | "FINAL">("NEW");
 
-    const nextFinal = (l_id: string) => {
-        setL_id(l_id);
+    const nextFinal = () => {
         setStep("FINAL");
     }
 
     switch (step) {
         case "NEW":
-            return <StepNew next={nextFinal} />
+            return <StepNew next={nextFinal} {...{ p_id, exp_price }} />
 
         case "FINAL":
-            return <StepFinal p_id={p_id} l_id={l_id} />
+            return <StepFinal />
     }
 }
 
-const StepNew = ({ next }: { next: (l_id: string) => void }) => {
+const StepNew = ({ next, p_id, exp_price }: { next: () => void, p_id: string, exp_price: number }) => {
     const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
     const [offer, setOffer] = useState("");
+    const [error, setError] = useState({});
     const addLead = useStoreLead((s) => s.addLead);
 
     const { mutate: requestAddLead, isPending: pendingAddLead } = useMutation({
@@ -42,13 +39,33 @@ const StepNew = ({ next }: { next: (l_id: string) => void }) => {
             toast.error(error.message);
         },
         onSuccess: (data) => {
-            addLead({ _id: data.l_id, l_phone: phone, l_details: { name } });
-            next(data.l_id);
+            addLead({ _id: data.l_id, name, price: Number(offer), p_id, status: "WAITING" });
+            next();
         }
     })
 
     const mutateHandler = () => {
-        requestAddLead({ apiParam: apiParams.ADD_LEAD, body: { phone, details: { name } } });
+        if (!name) {
+            setError({ name: "Name is required" });
+            return;
+        }
+        if (!offer) {
+            setError({ offer: "Enter Offered Price" });
+            return;
+        }
+        const percent = exp_price * (10 / 100);
+        let min = exp_price - percent;
+        let max = exp_price + percent;
+        if (Number(offer) < min) {
+            setError({ offer: `Price can not be less than Rs.${Number(min).toFixed(0)}` })
+            return;
+        }
+        if (Number(offer) > max) {
+            setError({ offer: `Price can not be more than Rs.${Number(max).toFixed(0)}` })
+            return;
+        }
+
+        requestAddLead({ apiParam: apiParams.ADD_LEAD, body: { name, p_id, price: Number(offer) } });
     }
 
     return (<>
@@ -59,18 +76,22 @@ const StepNew = ({ next }: { next: (l_id: string) => void }) => {
                 <DrawerDescription>Enter Lead Details</DrawerDescription>
             </DrawerHeader>
             <div className="p-4 flex flex-col gap-4">
-                <div>
-                    <Label htmlFor="name" className='text-slate-600 text-sm pb-1'>Enter Client Name</Label>
-                    <Input value={name} onChange={e => setName(e.target.value)} id='name' placeholder='Name' />
-                </div>
-                <div>
-                    <Label htmlFor="phone" className='text-slate-600 text-sm pb-1'>Enter Phone no.</Label>
-                    <Input value={phone} onChange={e => setPhone(e.target.value)} id='phone' placeholder="Whatsapp Number" />
-                </div>
-                <div>
-                    <Label htmlFor="offer" className='text-slate-600 text-sm pb-1'>Enter Offered Price</Label>
-                    <Input value={offer} onChange={e => setOffer(e.target.value)} id='offer' placeholder='Rs.' type="number" />
-                </div>
+                <InputField
+                    label="Enter Client Name"
+                    name="name"
+                    value={name}
+                    onChange={(val) => setName(val)}
+                    error={error}
+                    placeholder="Name"
+                />
+                <InputField
+                    label="Enter Offered Price"
+                    name="offer"
+                    value={offer}
+                    onChange={(val) => setOffer(val)}
+                    error={error}
+                    placeholder="Rs."
+                />
             </div>
             <DrawerFooter>
                 <Button onClick={mutateHandler} disabled={pendingAddLead}>
@@ -84,44 +105,19 @@ const StepNew = ({ next }: { next: (l_id: string) => void }) => {
     </>)
 
 }
-const StepFinal = ({ l_id, p_id }: { p_id: string, l_id: string }) => {
-    const addPl = useStorePL((s) => s.addPL);
-
-    const { mutate: requestAddLeadToProperty, isPending } = useMutation({
-        mutationFn: request<RequestAddLeadToProperty, ResponseAddLeadToProperty>,
-        onError: (error: ErrorResponse) => {
-            toast.error(error.message);
-        },
-        onSuccess: () => {
-            addPl(p_id, l_id);
-        }
-    })
-
-    const mutateHandler = () => {
-        requestAddLeadToProperty({ apiParam: apiParams.ADD_LEAD_TO_PROPERTY, body: { l_id, p_id } });
-    }
-
-    useEffect(() => {
-        mutateHandler();
-    }, [])
+const StepFinal = () => {
 
     return (<>
         <div className="mx-auto w-full max-w-sm">
 
             <div className="p-4 flex flex-col gap-4 text-center">
-                {
-                    isPending ? (<>
-                        <ClockFading className="m-auto animate-pulse text-slate-900" size={30} />
-                        <p className="text-slate-700">Adding Lead to this property...</p>
-                    </>) : (<>
-                        <CircleCheckBig className="m-auto" size={30} />
-                        <p>Lead added to this property</p>
-                    </>)
-                }
+
+                <CircleCheckBig className="m-auto" size={30} />
+                <p>Lead added to this property</p>
             </div>
             <DrawerFooter>
                 <DrawerClose asChild>
-                    {!isPending && <Button >Done</Button>}
+                    <Button >Done</Button>
                 </DrawerClose>
             </DrawerFooter>
         </div>

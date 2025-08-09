@@ -9,15 +9,16 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { Toaster } from "sonner";
+import { nav } from "./constants";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Navigate to="/login" replace />
+    path: nav.root,
+    element: <Navigate to={nav.login} replace />
   },
-  { path: "/login", element: <LoginPage /> },
-  { path: "/home", element: <DashboardPage /> },
-  { path: "/register", element: <RegisterAgent /> },
+  { path: nav.login, element: <LoginPage /> },
+  { path: nav.dashboard, element: <DashboardPage /> },
+  { path: nav.register, element: <RegisterAgent /> },
 ]);
 
 const queryClient = new QueryClient();

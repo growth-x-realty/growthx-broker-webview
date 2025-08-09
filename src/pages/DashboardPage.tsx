@@ -6,8 +6,8 @@ import type { ErrorResponse, ResponseGetMyProperties } from '@/types/response'
 import { request } from '@/apis/api'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router'
-import { apiParams } from '@/constants'
-import { useStoreInterested, useStoreProperty, useStoreLead, useStorePL } from '@/state/store'
+import { apiParams, nav } from '@/constants'
+import { useStoreInterested, useStoreProperty, useStoreLead } from '@/state/store'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
@@ -28,7 +28,6 @@ const DashboardPage = () => {
     const setProperties = useStoreProperty((s) => s.setProperties);
     const setIntersted = useStoreInterested((s) => s.setIntersted);
     const setLeads = useStoreLead((s) => s.setLeads);
-    const setPl = useStorePL((s) => s.setPl);
     const { data: res, error, isError, isPending } = useQuery({
         queryKey: ["get-data"],
         queryFn: async () => await request<RequestGetMyProperties, ResponseGetMyProperties>({ apiParam: apiParams.GET_DATA, body: {} })
@@ -43,7 +42,8 @@ const DashboardPage = () => {
         let err = tmp as ErrorResponse;
         toast.error(err.message);
         if (err.error == "UNAUTHORIZED") {
-            navigate("/login");
+            window.localStorage.clear();
+            navigate(nav.root);
         }
         return <DashboardFetchingError error={err} />
     }
@@ -53,7 +53,6 @@ const DashboardPage = () => {
         setProperties(res.properties);
         setIntersted(res.intersted);
         setLeads(res.leads);
-        setPl(res.propertyLead);
     }
 
     return (

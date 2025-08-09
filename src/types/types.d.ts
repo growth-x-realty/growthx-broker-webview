@@ -25,15 +25,6 @@ export type PropertyDetails = {
     addr?: string;
 };
 
-export type BrokerDetails = {
-    name?: string;
-    addr?: string;
-};
-
-export type LeadDetails = {
-    name?: string;
-    addr?: string;
-};
 
 export type Property = {
     _id: string;
@@ -44,8 +35,11 @@ export type Property = {
 
 export type Lead = {
     _id: string;
-    l_phone: string;
-    l_details: LeadDetails;
+    p_id: string; // foregin key "Property"
+    b_id: string; // foregin key "Broker"
+    name: string;
+    status: "WAITING" | "PROGRESS" | "SOLD";
+    price: number;
 };
 
 export type PropertyLead = {

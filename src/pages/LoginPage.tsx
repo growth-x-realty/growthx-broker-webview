@@ -1,19 +1,25 @@
 import { request } from "@/apis/api"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { InputOTP, InputOTPSlot } from "@/components/ui/input-otp"
 import { Label } from "@/components/ui/label"
 import type { ErrorResponse, ResponseLoginWithOtp, ResponseOtpWhatsapp } from "@/types/response"
 import { useMutation } from "@tanstack/react-query"
 import { ChevronLeft, MessageCircleCode } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-import { apiParams, msgs } from '@/constants'
+import { apiParams, enums, msgs, nav } from '@/constants'
 import { toast } from "sonner"
 import type { RequestLoginWithOtp, RequestOtpWhatsapp } from "@/types/request"
+import { InputField } from "@/sections/Input"
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [count, setCount] = useState(1);
+    useEffect(() => {
+        if (window.localStorage.getItem(enums.token)) {
+            navigate(nav.dashboard);
+        }
+    }, [])
     const next = () => {
         if (count == 2) return;
         setCount(count + 1);
@@ -41,6 +47,8 @@ const LoginPage = () => {
 
 const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
     const [phone, setPhone] = useState("");
+    const [error, setError] = useState<Record<string, string>>({});
+
     const navigate = useNavigate();
     const { mutate: requestOtpWhatsapp, isPending } = useMutation({
         mutationFn: request<RequestOtpWhatsapp, ResponseOtpWhatsapp>,
@@ -54,13 +62,25 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
         }
     })
     const mutateHandler = () => {
+        if (!phone) {
+            setError({ phone: "Phone is required" })
+            return;
+        }
+
         requestOtpWhatsapp({ apiParam: apiParams.REQ_WH_OTP, body: { phone } });
     }
 
     return (<>
         <div className="pt-10 pb-6">
-            <Label htmlFor="ph" className="pl-1 text-gray-800 pb-1 text-xs font-semibold">Enter your registered phone</Label>
-            <Input value={phone} onChange={e => setPhone(e.target.value)} id="ph" type="tel" placeholder="Whatsapp Number" />
+            <InputField
+                label="Enter your registered phone"
+                name="phone"
+                onChange={val => setPhone(val)}
+                value={phone}
+                type="tel"
+                placeholder="Whatsapp Number"
+                error={error}
+            />
         </div>
 
         <div className="flex flex-col gap-3">
@@ -71,7 +91,7 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
                         : "Sending OTP ..."
                 }
             </Button>
-            <Button variant={"secondary"} onClick={() => navigate("/register")}>Register as an Agent</Button>
+            <Button variant={"secondary"} onClick={() => navigate(nav.register)}>Register as an Agent</Button>
         </div >
     </>)
 }
@@ -86,10 +106,10 @@ const StepOtp = ({ prev }: { next: () => void; prev: () => void; }) => {
             toast.error(error.message);
         },
         onSuccess: (data) => {
-            toast.success(`${msgs.login} ${data.b_details.name || "User"}!`);
-            window.localStorage.setItem('token', data.token);
-            window.localStorage.setItem('name', data.b_details.name || "User");
-            navigate("/home");
+            toast.success(`${msgs.login} ${data.name || "User"}!`);
+            window.localStorage.setItem(enums.token, data.token);
+            window.localStorage.setItem(enums.name, data.name || "User");
+            navigate(nav.dashboard);
         }
     })
 

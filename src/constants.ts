@@ -1,7 +1,17 @@
 import type { ApiParams } from '../types'
 
+export const enums = {
+    token: "token",
+    name: "name",
+}
 export const nav = {
-
+    root: "/",
+    home: "/home",
+    login: "/login",
+    register: "/register",
+    dashboard: "/dashboard",
+    contactus: "/contact-us",
+    aboutus: "/about-us"
 };
 
 export const query_key = {
@@ -48,6 +58,11 @@ export const apiParams = {
     GET_DATA: {
         url: BASE_URL + 'get-data',
         method: "GET",
+        auth: true
+    } as ApiParams,
+    LOGOUT: {
+        url: BASE_URL + 'logout',
+        method: "POST",
         auth: true
     } as ApiParams,
 }

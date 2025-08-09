@@ -2,7 +2,7 @@ import { request } from "@/apis/api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { apiParams, msgs } from "@/constants"
+import { apiParams, msgs, nav } from "@/constants"
 import type { RequestBeBroker } from "@/types/request"
 import type { ErrorResponse, ResponseBeBroker } from "@/types/response"
 import { useMutation } from "@tanstack/react-query"
@@ -33,7 +33,7 @@ const RegisterAgent = () => {
                     toast.success(msgs.be_broker_done);
                     break;
             }
-            navigate("/login");
+            navigate(nav.login);
         }
     })
 
