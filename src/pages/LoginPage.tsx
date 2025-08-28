@@ -57,7 +57,8 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
         },
         onSuccess: (data: ResponseOtpWhatsapp) => {
             window.localStorage.setItem('login', JSON.stringify({ phone, hash: data.hash }));
-            toast.success(`${msgs.req_otp_success} ${phone}`);
+            // toast.success(`${msgs.req_otp_success} ${phone}`);
+            toast.success(`OTP sent to your registered email`);
             next();
         }
     })
@@ -87,7 +88,7 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
             <Button disabled={isPending} onClick={mutateHandler}>
                 {
                     !isPending ?
-                        <><MessageCircleCode />Get OTP on whatsapp</>
+                        <><MessageCircleCode />Get OTP on email</>
                         : "Sending OTP ..."
                 }
             </Button>
