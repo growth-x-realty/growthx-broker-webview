@@ -9,13 +9,15 @@ export type ErrorType =
     | "LEAD_NOT_EXIST"
     | "BROKER_NOT_EXIST"
     | "INTERNAL_ERROR"
+    | "WHATSAPP_ERROR"
+    | "EMAIL_ERROR"
 
 export type PropertyZones =
     | "ZONE_1"
     | "ZONE_2"
 
 
-export type PropertyStatus = "UNPUBLISHED" | "PUBLISHED";
+export type PropertyStatus = "UNPUBLISHED" | "OPEN" | "PROGRESS" | "SOLD";
 
 export type InboxTypes = "REQ_BROKER" | "CONTACT_US";
 
@@ -31,6 +33,7 @@ export type Property = {
     p_details: PropertyDetails;
     p_status: PropertyStatus;
     p_zone: PropertyZones;
+    exp_price: number;
 }
 
 export type Lead = {
@@ -46,4 +49,18 @@ export type PropertyLead = {
     p_id: string; // foregin key "Property"
     l_id: string; // foregin key "Lead"
     status: "SOLD" | "WAITING";
+};
+
+export type Broker = {
+    _id: string;
+    b_phone: string;
+    b_email: string;
+    name: string;
+    addr?: string;
+};
+
+export type Inbox = {
+    type: InboxTypes;
+    name: string;
+    phone: string;
 };

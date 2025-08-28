@@ -9,8 +9,14 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 export default function ContactUs() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        // extract data form from
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+        const name = formData.get("name") as string;
+        const email = formData.get("email") as string;
+        const phone = formData.get("phone") as string;
+        const message = formData.get("message") as string;
         // Handle form submission here
-        console.log("Form submitted");
+        console.log("Form submitted", formData, { name, email, phone, message });
     };
 
     return (
@@ -26,7 +32,7 @@ export default function ContactUs() {
                             </div>
                             <div>
                                 <p className="text-sm text-muted-foreground">Email</p>
-                                <p className="font-medium">hello@company.com</p>
+                                <p className="font-medium">puspendra@gmail.com</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -38,7 +44,7 @@ export default function ContactUs() {
                             </div>
                             <div>
                                 <p className="text-sm text-muted-foreground">Phone</p>
-                                <p className="font-medium">+91 1234 121 122</p>
+                                <p className="font-medium">+91 99890 72434</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -67,6 +73,7 @@ export default function ContactUs() {
                                 <Label htmlFor="name">Full Name</Label>
                                 <Input
                                     id="name"
+                                    name="name"
                                     type="text"
                                     placeholder="Your full name"
                                     required
@@ -78,6 +85,7 @@ export default function ContactUs() {
                                 <Label htmlFor="email">Email Address</Label>
                                 <Input
                                     id="email"
+                                    name="email"
                                     type="email"
                                     placeholder="your.email@example.com"
                                     required
@@ -89,6 +97,7 @@ export default function ContactUs() {
                                 <Label htmlFor="phone">Phone Number</Label>
                                 <Input
                                     id="phone"
+                                    name="phone"
                                     type="tel"
                                     placeholder="+91 XXXX XXX XXX"
                                     className="bg-input-background"
@@ -99,6 +108,7 @@ export default function ContactUs() {
                                 <Label htmlFor="message">Message</Label>
                                 <Textarea
                                     id="message"
+                                    name="message"
                                     placeholder="Tell us about your inquiry..."
                                     required
                                     rows={4}

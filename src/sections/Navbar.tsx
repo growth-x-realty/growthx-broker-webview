@@ -43,7 +43,7 @@ const Navbar = () => {
                     </DialogTitle>
                     <div className='bg-primary/30 py-7 flex flex-col items-center gap-2 text-lg'>
                         <NavLink to={nav.root}>Home</NavLink>
-                        <NavLink to={"#"}>About</NavLink>
+                        {/* <NavLink to={"#"}>About</NavLink> */}
                         <NavLink to={nav.contactus}>Contact us</NavLink>
                         <Button disabled={isPending} onClick={mutationHandler} variant={"ghost"} className='border-2 border-slate-500 text-slate-6001'>Logout</Button>
                     </div>

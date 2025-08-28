@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Building2, NotebookTabs } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query'
 import type { RequestGetMyProperties } from '@/types/request'
@@ -24,6 +24,7 @@ const styleActiveTab = "data-[state=active]:bg-primary data-[state=active]:text-
 const styleActiveSubTab = "data-[state=active]:bg-transparent data-[state=active]:text-primary text-slate-500 text-xs";
 
 const DashboardPage = () => {
+    const [search, setSearch] = useState("");
     const navigate = useNavigate();
     const setProperties = useStoreProperty((s) => s.setProperties);
     const setIntersted = useStoreInterested((s) => s.setIntersted);
@@ -65,7 +66,7 @@ const DashboardPage = () => {
                 <h1 className='text-slate-700 text-sm'>Discover Lucrative Property</h1>
 
                 {/* search */}
-                <PropertyFilter />
+                <PropertyFilter search={search} setSearch={setSearch} />
 
                 {/* tabs */}
                 <Tabs defaultValue="properties">
@@ -78,7 +79,15 @@ const DashboardPage = () => {
                     <TabsContent value="properties" className='flex flex-col gap-4'>
                         {/* List of properties */}
                         {
-                            res.properties.map(({ _id }) => (
+                            res.properties.filter((property) => {
+                                let name = property.p_details?.name;
+                                let addr = property.p_details?.addr;
+
+                                if (name?.toLowerCase().includes(search.toLowerCase()) || addr?.toLowerCase().includes(search.toLowerCase())) {
+                                    return true;
+                                }
+                                return false;
+                            }).map(({ _id }) => (
                                 <React.Fragment key={_id}>
                                     <PropertyCard p_id={_id} />
                                 </React.Fragment>

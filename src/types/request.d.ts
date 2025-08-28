@@ -76,6 +76,7 @@ export interface RequestAddProperty {
     p_status: PropertyStatus;
     p_zone: PropertyZones;
     p_details: PropertyDetails;
+    exp_price: number;
 }
 
 export interface RequestUpdateProperty {
@@ -83,6 +84,11 @@ export interface RequestUpdateProperty {
     p_status?: PropertyStatus; // notification trigger
     p_zone?: PropertyZones;
     p_details?: PropertyDetails;
+    exp_price?: number;
+}
+
+export interface RequestDeleteProperty {
+    p_id: string; // "Property" _id
 }
 
 export interface RequestGetAllData { }

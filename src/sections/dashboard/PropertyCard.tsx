@@ -43,14 +43,14 @@ export const PropertyCard = ({ p_id }: { p_id: string }) => {
                 <div>
                     <p className='font-semibold'>{property.p_details?.name || "Name Unknown"}</p>
                     <p className='text-muted-foreground italic text-sm'>{property.p_details?.addr || "Address Unknown"}</p>
-                    <p className='text-green-500 text-sm font-semibold'>OPEN for sale</p>
+                    <p> <span className='text-sm  text-muted-foreground'>Status : </span> <span className="text-sm font-semibold text-slate-600">{property.p_status}</span></p>
                 </div>
             </div>
-            <p> <span className='text-sm  text-muted-foreground pl-1'>Expected Amount</span> <span className="italic text-sm font-semibold text-slate-600">100</span></p>
-            <div className="flex justify-between">
+            <p> <span className='text-sm  text-muted-foreground pl-1'>Expected Amount</span> <span className="italic text-sm font-semibold text-slate-600">{property.exp_price}</span></p>
+            <div className="flex justify-between pb-2">
                 <div className='py-1.5 pl-1'>
-                    <p className='text-xs'><span className='font-semibold text-red-900'>15 Agents</span> shown interest</p>
-                    <p className='text-xs'><span className='font-semibold text-blue-950'>2 Active</span> Leads</p>
+                    {/* <p className='text-xs'><span className='font-semibold text-red-900'>15 Agents</span> shown interest</p> */}
+                    {/* <p className='text-xs'><span className='font-semibold text-blue-950'>2 Active</span> Leads</p> */}
                 </div>
                 <AddInterested p_id={p_id} />
             </div>

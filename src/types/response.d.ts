@@ -1,4 +1,4 @@
-import { ErrorType, Lead, Property, PropertyLead } from './types'
+import { Broker, ErrorType, Inbox, Lead, Property } from './types'
 
 export type SuccessResponse = {
     status: "success";
@@ -73,8 +73,11 @@ export interface ResponseUpdateProperty extends SuccessResponse {
 
 }
 
-export interface ResponseGetAllData extends SuccessResponse {
-    //TODO
+export interface ResponseGetAdminData extends SuccessResponse {
+    properties: Property[];
+    leads: Lead[];
+    brokers: Broker[];
+    inbox: Inbox[];
 }
 
 /**
