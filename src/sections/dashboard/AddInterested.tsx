@@ -5,6 +5,7 @@ import { useStoreInterested } from "@/state/store";
 import type { RequestAddInteresed } from "@/types/request";
 import type { ErrorResponse, ResponseAddInteresed } from "@/types/response";
 import { useMutation } from "@tanstack/react-query";
+import { Heart } from "lucide-react";
 import { toast } from "sonner";
 
 export const AddInterested = ({ p_id }: { p_id: string }) => {
@@ -27,8 +28,14 @@ export const AddInterested = ({ p_id }: { p_id: string }) => {
 
     return (<>
         {
-            !isInterested &&
-            <Button disabled={isPending} onClick={mutateHandler} variant={"outline"} className="text-slate-900 rounded-full text-xs">show interest</Button>
+            !isInterested ?
+                <Button disabled={isPending} onClick={mutateHandler} variant={"outline"} className="">
+                    <Heart />
+                </Button>
+                :
+                <Button disabled={isInterested} variant={"outline"} className="">
+                    <Heart className="text-red-500" />
+                </Button>
         }
     </>)
 }

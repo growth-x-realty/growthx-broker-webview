@@ -1,4 +1,4 @@
-import { PropertyDetails, PropertyStatus, PropertyZones } from "./types";
+import { Property } from "./types";
 
 export interface Request { }
 /**
@@ -72,20 +72,9 @@ export interface RequestAddBroker {
     addr?: string;
 }
 
-export interface RequestAddProperty {
-    p_status: PropertyStatus;
-    p_zone: PropertyZones;
-    p_details: PropertyDetails;
-    exp_price: number;
-}
+export interface RequestAddProperty extends Omit<Property, "_id"> { }
 
-export interface RequestUpdateProperty {
-    p_id: string; // "Property" _id
-    p_status?: PropertyStatus; // notification trigger
-    p_zone?: PropertyZones;
-    p_details?: PropertyDetails;
-    exp_price?: number;
-}
+export interface RequestUpdateProperty extends Property { }
 
 export interface RequestDeleteProperty {
     p_id: string; // "Property" _id

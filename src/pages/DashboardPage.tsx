@@ -12,13 +12,13 @@ import { useStoreInterested, useStoreProperty, useStoreLead } from '@/state/stor
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 
-import { PropertyCard } from "@/sections/dashboard/PropertyCard";
 import { InterestedProperties } from "@/sections/dashboard/InterestedProperties";
 import { LeadTableOfBroker } from "@/sections/dashboard/LeadTable";
 import PropertyFilter from "@/sections/dashboard/PropertyFilter";
 import Navbar from "@/sections/Navbar";
 import DashboardFetching from '@/sections/Fallback/DashboardFetching';
 import DashboardFetchingError from '@/sections/Fallback/DashboardFetchingError';
+import PropertyCard from '@/sections/dashboard/PropertyCard';
 
 const styleActiveTab = "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground p-4 text-slate-500";
 const styleActiveSubTab = "data-[state=active]:bg-transparent data-[state=active]:text-primary text-slate-500 text-xs";
@@ -79,11 +79,10 @@ const DashboardPage = () => {
                     <TabsContent value="properties" className='flex flex-col gap-4'>
                         {/* List of properties */}
                         {
-                            res.properties.filter((property) => {
-                                let name = property.p_details?.name;
-                                let addr = property.p_details?.addr;
+                            res.properties.filter((prop) => {
+                                if (search == "") return true;
 
-                                if (name?.toLowerCase().includes(search.toLowerCase()) || addr?.toLowerCase().includes(search.toLowerCase())) {
+                                if ((prop.name + ' ' + prop.addr + ' ').toLowerCase().includes(search.toLowerCase())) {
                                     return true;
                                 }
                                 return false;

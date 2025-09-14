@@ -1,3 +1,5 @@
+import { _Area } from "./constant";
+
 export type ErrorType =
     | "UNAUTHORIZED"
     | "OTP_TIMEOUT"
@@ -12,29 +14,7 @@ export type ErrorType =
     | "WHATSAPP_ERROR"
     | "EMAIL_ERROR"
 
-export type PropertyZones =
-    | "ZONE_1"
-    | "ZONE_2"
-
-
-export type PropertyStatus = "UNPUBLISHED" | "OPEN" | "PROGRESS" | "SOLD";
-
 export type InboxTypes = "REQ_BROKER" | "CONTACT_US";
-
-export type PropertyDetails = {
-    name?: string;
-    img?: string[];
-    addr?: string;
-};
-
-
-export type Property = {
-    _id: string;
-    p_details: PropertyDetails;
-    p_status: PropertyStatus;
-    p_zone: PropertyZones;
-    exp_price: number;
-}
 
 export type Lead = {
     _id: string;
@@ -64,3 +44,65 @@ export type Inbox = {
     name: string;
     phone: string;
 };
+
+//================= Property ===================
+
+export type PropertyDetails = {
+    // Property Details
+    propertyType?: "Flat" | "Villa";
+    builderName?: string;
+    contactNo?: string;
+    builtUpAreaSqFt?: number;
+    bhk?: number;
+    facing?: string;
+    possessionStatus?: string;
+    ageOfProperty?: string;
+    carParking?: number;
+    handoverDate?: Date;
+    images?: string[];
+
+    // Flat Details
+    communityType?: string;
+    totalFlats?: number;
+    carpetAreaSqFt?: number;
+    floorNumber?: number;
+    totalFloors?: number;
+
+    // Villa Details
+    villaType?: string;
+    landSizeSqYard?: number;
+    totalVillas?: number;
+    villaTotalFloors?: number;
+    gatedCommunity?: boolean;
+    homeTheater?: boolean;
+    liftProvision?: boolean;
+
+    // Pricing Details
+    priceAvailable?: boolean;
+    totalPrice?: number;
+    perSqFtRate?: number;
+    floorRiseCharges?: number;
+    corpus?: number;
+
+    // Amenities Details
+    amenities?: string[];
+    powerBackup?: boolean;
+    lifts?: boolean;
+    carParkingCovered?: boolean;
+    guestCarParking?: boolean;
+    securityCCTV?: boolean;
+    clubhouseGymPool?: boolean;
+    childrensPlayArea?: boolean;
+    communityHall?: boolean;
+}
+
+export type Property = {
+    _id: string;
+    name: string;
+    addr: string;
+    p_details: Record<string, any>;
+    p_status: "UNPUBLISHED" | "OPEN" | "PROGRESS" | "SOLD";
+    area: keyof typeof _Area;
+}
+
+//================= Property End ===================

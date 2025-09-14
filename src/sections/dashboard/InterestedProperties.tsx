@@ -1,6 +1,6 @@
 import { useStoreInterested } from "@/state/store";
 import React from "react";
-import { PropertyCard } from "./PropertyCard";
+import PropertyCard from "./PropertyCard";
 
 export const InterestedProperties = () => {
     const set = useStoreInterested((s) => s.set);
