@@ -59,7 +59,8 @@ export type PropertyDetails = {
     ageOfProperty?: string;
     carParking?: number;
     handoverDate?: Date;
-    images?: string[];
+    images?: string;
+    googleMapLocation?: string;
 
     // Flat Details
     communityType?: string;

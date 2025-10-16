@@ -46,26 +46,14 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
             <Card className="w-full max-w-sm mx-auto overflow-hidden py-0">
                 {/* Image Carousel */}
                 <div className="relative h-48">
-                    {(details.images?.length || true) ? (
+                    {(details.images) ? (
                         <>
                             <img
-                                // src={details.images[0]}
-                                src={"https://images.unsplash.com/photo-1559329146-807aff9ff1fb"}
+                                src={details.images}
                                 alt={`${details.builderName} property`}
                                 className="w-full h-full object-cover"
                             />
-                            {/* {details.images.length > 1 && (
-                                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
-                                    {details.images.map((_, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => setCurrentImageIndex(index)}
-                                            className={`w-2 h-2 rounded-full ${index === currentImageIndex ? "bg-white" : "bg-white/50"
-                                                }`}
-                                        />
-                                    ))}
-                                </div>
-                            )} */}
+
                         </>
                     ) : (
                         <div className="w-full h-full bg-gray-200 flex items-center justify-center">

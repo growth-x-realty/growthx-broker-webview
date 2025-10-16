@@ -21,7 +21,7 @@ export const query_key = {
     INBOX: "INBOX"
 };
 
-// export const BASE_URL = "http://192.168.43.133:7071/api/";
+// export const BASE_URL = "http://localhost:7071/api/";
 export const BASE_URL = "https://growthx-broker-backend-fvcrfvdaggd6f8dk.centralindia-01.azurewebsites.net/api/"
 
 

@@ -72,6 +72,18 @@ export interface RequestAddBroker {
     addr?: string;
 }
 
+export interface RequestUpdateBroker {
+    b_id: string;
+    b_phone: string;
+    b_email: string;
+    name: string;
+    addr?: string;
+}
+
+export interface RequestDeleteBroker {
+    b_id: string;
+}
+
 export interface RequestAddProperty extends Omit<Property, "_id"> { }
 
 export interface RequestUpdateProperty extends Property { }
@@ -81,3 +93,8 @@ export interface RequestDeleteProperty {
 }
 
 export interface RequestGetAllData { }
+
+export interface RequestUploadUrl {
+    ext: string; // extention
+    size?: string;
+}

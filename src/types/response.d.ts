@@ -65,6 +65,14 @@ export interface ResponseAddBroker extends SuccessResponse {
     b_id: string;
 }
 
+export interface ResponseUpdateBroker extends SuccessResponse {
+
+}
+
+export interface ResponseDeleteBroker extends SuccessResponse {
+
+}
+
 export interface ResponseAddProperty extends SuccessResponse {
     p_id: string
 }
@@ -78,6 +86,11 @@ export interface ResponseGetAdminData extends SuccessResponse {
     leads: Lead[];
     brokers: Broker[];
     inbox: Inbox[];
+}
+
+export interface ResponseUploadUrl extends SuccessResponse {
+    url: string;
+    uploadUrl: string;
 }
 
 /**
