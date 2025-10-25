@@ -28,31 +28,6 @@ export const LeadTableOfProperty = ({ p_id }: { p_id: string }) => {
     </>)
 }
 
-export const LeadTableOfBroker = () => {
-    const leads = useStoreLead((s) => s.keys);
-    if (!leads?.length) {
-        return <p className="italic text-slate-700 text-center">No Lead</p>
-    }
-    return (<>
-        <Table>
-            <TableHeader>
-                <TableRow className="border-primary">
-                    <TableHead className=' text-primary-foreground italic'>Name</TableHead>
-                    <TableHead className=' text-primary-foreground italic'>Phone No</TableHead>
-                    <TableHead className=' text-primary-foreground italic'>Offered Price</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {leads.map((lead) => (
-                    <React.Fragment key={lead._id}>
-                        <LeadTableRow lead={lead} />
-                    </React.Fragment>
-                ))}
-            </TableBody>
-        </Table>
-    </>)
-}
-
 const LeadTableRow = ({ lead }: { lead: Omit<Lead, "b_id"> }) => {
 
     return (<>

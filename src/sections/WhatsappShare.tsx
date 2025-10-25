@@ -30,35 +30,49 @@ export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
         let message = `🏠 *${details.propertyType?.toUpperCase()} FOR SALE*\n\n`;
 
         // Builder and property name
-        message += `🏢 *Builder:* ${details.builderName}\n`;
-        message += `🏗️ *Project:* ${property.name}\n`;
+        if (details.builderName)
+            message += `🏢 *Builder:* ${details.builderName}\n`;
+        if (property.name)
+            message += `🏗️ *Project:* ${property.name}\n`;
 
         message += `\n`;
 
         // Key details
-        message += `📋 *KEY DETAILS:*\n`;
-        message += `• ${details.bhk} BHK ${details.propertyType}\n`;
-        message += `• ${details.builtUpAreaSqFt} sq ft Built-up Area\n`;
-        if ((details.propertyType === "Flat") && details.carpetAreaSqFt) {
+        if (details.bhk || details.builtUpAreaSqFt || details.carpetAreaSqFt || details.landSizeSqYard || details.villaType || details.facing || details.carParking)
+            message += `📋 *KEY DETAILS:*\n`;
+        if (details.bhk)
+            message += `• ${details.bhk} BHK ${details.propertyType}\n`;
+        if (details.builtUpAreaSqFt)
+            message += `• ${details.builtUpAreaSqFt} sq ft Built-up Area\n`;
+        if (details.carpetAreaSqFt)
             message += `• ${details.carpetAreaSqFt} sq ft Carpet Area\n`;
-        }
-        if (!(details.propertyType === "Flat")) {
+        if (details.landSizeSqYard)
             message += `• ${details.landSizeSqYard} sq yard Land Size\n`;
+        if (details.villaType)
             message += `• ${details.villaType} Villa\n`;
-        }
-        message += `• ${details.facing} Facing\n`;
-        message += `• ${details.carParking} Car Parking\n`;
+        if (details.facing)
+            message += `• ${details.facing} Facing\n`;
+        if (details.carParking)
+            message += `• ${details.carParking} Car Parking\n`;
         message += `\n`;
 
         // Property specific details
         if (details.propertyType === "Flat") {
-            message += `🏢 *FLAT DETAILS:*\n`;
-            message += `• Floor: ${details.floorNumber}/${details.totalFloors}\n`;
-            message += `• Total Flats: ${details.totalFlats}\n`;
-            message += `• Community: ${details.communityType}\n`;
+            if (details.floorNumber || details.totalFloors || details.totalFlats || details.communityType)
+                message += `🏢 *FLAT DETAILS:*\n`;
+            if (details.floorNumber)
+                message += `• Floor: ${details.floorNumber}\n`;
+            if (details.totalFloors)
+                message += `• Total Floors: ${details.totalFloors}\n`;
+            if (details.totalFlats)
+                message += `• Total Flats: ${details.totalFlats}\n`;
+            if (details.communityType)
+                message += `• Community: ${details.communityType}\n`;
         } else {
-            message += `🏘️ *VILLA DETAILS:*\n`;
-            message += `• ${details.totalFloors} Floors\n`;
+            if (details.totalFloors || details.totalVillas)
+                message += `🏘️ *VILLA DETAILS:*\n`;
+            if (details.totalFloors)
+                message += `• ${details.totalFloors} Floors\n`;
             if (details.totalVillas) {
                 message += `• Total Villas: ${details.totalVillas}\n`;
             }
@@ -78,10 +92,13 @@ export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
             message += `\n`;
         }
 
-        // Status and possession
-        message += `📅 *STATUS:*\n`;
-        message += `• Age: ${details.ageOfProperty}\n`;
-        message += `• Status: ${details.possessionStatus}\n`;
+        // Status and possess
+        if (details.ageOfProperty || details.possessionStatus || details.handoverDate)
+            message += `📅 *STATUS:*\n`;
+        if (details.ageOfProperty)
+            message += `• Age: ${details.ageOfProperty}\n`;
+        if (details.possessionStatus)
+            message += `• Status: ${details.possessionStatus}\n`;
         if (details.handoverDate) {
             message += `• Handover: ${new Date(details.handoverDate).toLocaleDateString()}\n`;
         }
@@ -100,12 +117,20 @@ export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
         }
 
         // Location
-        message += `📍 *LOCATION:*\n`;
-        message += `${property.addr}\n\n`;
+        if (property.addr) {
+            message += `📍 *LOCATION:*\n`;
+            message += `${property.addr}\n\n`;
+        }
+        if (details.googleMapLocation) {
+            message += `📍 *GOOGLE MAP LINK:*\n`;
+            message += `${details.googleMapLocation}\n\n`;
+        }
 
         // Contact
-        message += `📞 *CONTACT:*\n`;
-        message += `${details.contactNo}\n\n`;
+        if (details.contactNo) {
+            message += `📞 *CONTACT:*\n`;
+            message += `${details.contactNo}\n\n`;
+        }
 
         message += `💬 Interested? Let's discuss!`;
 

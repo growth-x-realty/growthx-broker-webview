@@ -43,6 +43,7 @@ export type Inbox = {
     type: InboxTypes;
     name: string;
     phone: string;
+    email: string;
 };
 
 //================= Property ===================

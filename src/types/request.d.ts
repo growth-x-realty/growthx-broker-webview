@@ -10,6 +10,7 @@ export interface RequestGetAllProperties extends Request { }
 export interface RequestBeBroker extends Request {
     name: string;
     phone: string;
+    email: string;
 }
 
 export interface RequestOtpWhatsapp extends Request {

@@ -13,7 +13,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 
 import { InterestedProperties } from "@/sections/dashboard/InterestedProperties";
-import { LeadTableOfBroker } from "@/sections/dashboard/LeadTable";
 import PropertyFilter from "@/sections/dashboard/PropertyFilter";
 import Navbar from "@/sections/Navbar";
 import DashboardFetching from '@/sections/Fallback/DashboardFetching';
@@ -105,8 +104,6 @@ const DashboardPage = () => {
                                 <TabsTrigger className={styleActiveSubTab} value="progress">Sale in <br /> Progress</TabsTrigger>
                                 <Separator orientation='vertical' />
                                 <TabsTrigger className={styleActiveSubTab} value="sold">Sold Properties</TabsTrigger>
-                                <Separator orientation='vertical' />
-                                <TabsTrigger className={styleActiveSubTab} value="leads">Active Leads</TabsTrigger>
                             </TabsList>
 
                             {/* List of Interested properties */}
@@ -122,11 +119,6 @@ const DashboardPage = () => {
                             {/* List of SOLD properties */}
                             <TabsContent value="sold" className='flex flex-col gap-4'>
                                 {/* <PropertyCard /> */}
-                            </TabsContent>
-
-                            {/* table of leads */}
-                            <TabsContent value="leads">
-                                <LeadTableOfBroker />
                             </TabsContent>
 
                         </Tabs>

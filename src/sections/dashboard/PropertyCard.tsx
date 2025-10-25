@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useStoreProperty } from "@/state/store";
 import type { PropertyDetails } from "@/types/types";
-import { Building, Calendar, Car, ChevronDown, ChevronUp, Dumbbell, Home, MapPin, Share, Shield, Square, UserPlus, Users } from "lucide-react";
+import { ArrowUpRight, Building, Calendar, Car, ChevronDown, ChevronUp, Dumbbell, Home, MapPin, Share, Shield, Square, UserPlus, Users } from "lucide-react";
 import { useState } from "react";
 import { WhatsAppShareDialog } from "../WhatsappShare";
 import { Separator } from "@/components/ui/separator";
@@ -79,11 +79,15 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                     {/* Key Details */}
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                            <Badge variant="secondary">{details.bhk} BHK</Badge>
-                            <span className="flex items-center text-sm text-muted-foreground">
-                                <Square className="w-4 h-4 mr-1" />
-                                {details.builtUpAreaSqFt} sq ft
-                            </span>
+                            {details.bhk &&
+                                <Badge variant="secondary">{details.bhk} BHK</Badge>
+                            }
+                            {details.builtUpAreaSqFt &&
+                                <span className="flex items-center text-sm text-muted-foreground">
+                                    <Square className="w-4 h-4 mr-1" />
+                                    {details.builtUpAreaSqFt} sq ft
+                                </span>
+                            }
                         </div>
                     </div>
 
@@ -108,6 +112,9 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                         <MapPin className="w-4 h-4 mt-0.5 text-muted-foreground" />
                         <p className="text-sm text-muted-foreground line-clamp-2">{property.addr}</p>
                     </div>
+                    {details.googleMapLocation &&
+                        <a href={details.googleMapLocation} className='text-muted-foreground text-sm border rounded-2xl px-2 flex border-muted-foreground items-center w-fit'>  Google Map <ArrowUpRight size={16} /></a>
+                    }
 
                     {/* Action Buttons */}
                     <div className="flex gap-2">
@@ -184,62 +191,83 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                             <div>
                                 <h4 className="font-medium mb-2">Property Details</h4>
                                 <div className="grid grid-cols-1 gap-2 text-sm">
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">Facing:</span>
-                                        <span>{details.facing}</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">Age:</span>
-                                        <span>{details.ageOfProperty}</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">Status:</span>
-                                        <span>{details.possessionStatus}</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">Parking:</span>
-                                        <span>{details.carParking}</span>
-                                    </div>
+                                    {details.facing &&
+                                        <div className="flex justify-between">
+                                            <span className="text-muted-foreground">Facing:</span>
+                                            <span>{details.facing}</span>
+                                        </div>
+                                    }
+                                    {details.ageOfProperty &&
+                                        <div className="flex justify-between">
+                                            <span className="text-muted-foreground">Age:</span>
+                                            <span>{details.ageOfProperty}</span>
+                                        </div>
+                                    }
+                                    {details.possessionStatus &&
+                                        <div className="flex justify-between">
+                                            <span className="text-muted-foreground">Status:</span>
+                                            <span>{details.possessionStatus}</span>
+                                        </div>
+                                    }
+                                    {details.carParking &&
+                                        <div className="flex justify-between">
+                                            <span className="text-muted-foreground">Parking:</span>
+                                            <span>{details.carParking}</span>
+                                        </div>
+                                    }
 
                                     {/* Flat specific details */}
                                     {(details.propertyType == "Flat") && (
                                         <>
-                                            <div className="flex justify-between">
-                                                <span className="text-muted-foreground">Floor:</span>
-                                                <span>{details.floorNumber}/{details.totalFloors}</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-muted-foreground">Total Flats:</span>
-                                                <span>{details.totalFlats}</span>
-                                            </div>
+                                            {
+                                                details.floorNumber &&
+                                                <div className="flex justify-between">
+                                                    <span className="text-muted-foreground">Floor:</span>
+                                                    <span>{details.floorNumber}{details.totalFloors && <>/{details.totalFloors}</>}</span>
+                                                </div>
+                                            }
+                                            {details.totalFlats &&
+                                                <div className="flex justify-between">
+                                                    <span className="text-muted-foreground">Total Flats:</span>
+                                                    <span>{details.totalFlats}</span>
+                                                </div>
+                                            }
                                             {details.carpetAreaSqFt && (
                                                 <div className="flex justify-between">
                                                     <span className="text-muted-foreground">Carpet Area:</span>
                                                     <span>{details.carpetAreaSqFt} sq ft</span>
                                                 </div>
                                             )}
-                                            <div className="flex justify-between">
-                                                <span className="text-muted-foreground">Community:</span>
-                                                <span>{details.communityType}</span>
-                                            </div>
+                                            {details.communityType &&
+                                                <div className="flex justify-between">
+                                                    <span className="text-muted-foreground">Community:</span>
+                                                    <span>{details.communityType}</span>
+                                                </div>
+                                            }
                                         </>
                                     )}
 
                                     {/* Villa specific details */}
                                     {!(details.propertyType == "Flat") && (
                                         <>
-                                            <div className="flex justify-between">
-                                                <span className="text-muted-foreground">Villa Type:</span>
-                                                <span>{details.villaType}</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-muted-foreground">Land Size:</span>
-                                                <span>{details.landSizeSqYard} sq yd</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span className="text-muted-foreground">Floors:</span>
-                                                <span>{details.totalFloors}</span>
-                                            </div>
+                                            {details.villaType &&
+                                                <div className="flex justify-between">
+                                                    <span className="text-muted-foreground">Villa Type:</span>
+                                                    <span>{details.villaType}</span>
+                                                </div>
+                                            }
+                                            {details.landSizeSqYard &&
+                                                <div className="flex justify-between">
+                                                    <span className="text-muted-foreground">Land Size:</span>
+                                                    <span>{details.landSizeSqYard} sq yd</span>
+                                                </div>
+                                            }
+                                            {details.totalFloors &&
+                                                <div className="flex justify-between">
+                                                    <span className="text-muted-foreground">Floors:</span>
+                                                    <span>{details.totalFloors}</span>
+                                                </div>
+                                            }
                                             {details.totalVillas && (
                                                 <div className="flex justify-between">
                                                     <span className="text-muted-foreground">Total Villas:</span>
@@ -256,6 +284,18 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                                 <div>
                                     <h4 className="font-medium mb-2">Pricing Details</h4>
                                     <div className="space-y-1 text-sm">
+                                        {details.totalPrice && (
+                                            <div className="flex justify-between">
+                                                <span className="text-muted-foreground">Total Price:</span>
+                                                <span>₹{details.totalPrice.toLocaleString()}</span>
+                                            </div>
+                                        )}
+                                        {details.perSqFtRate && (
+                                            <div className="flex justify-between">
+                                                <span className="text-muted-foreground">per sqft rate:</span>
+                                                <span>₹{details.perSqFtRate.toLocaleString()}</span>
+                                            </div>
+                                        )}
                                         {details.floorRiseCharges && (
                                             <div className="flex justify-between">
                                                 <span className="text-muted-foreground">Floor Rise Charges:</span>

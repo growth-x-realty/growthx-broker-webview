@@ -14,6 +14,7 @@ import { toast } from "sonner"
 const RegisterAgent = () => {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
 
     const navigate = useNavigate();
     const { mutate: requestBeBroker, isPending } = useMutation({
@@ -39,7 +40,7 @@ const RegisterAgent = () => {
 
     const mutateHandler = () => {
         if (!name || !phone) return;
-        requestBeBroker({ apiParam: apiParams.REQ_BROKER, body: { name, phone } });
+        requestBeBroker({ apiParam: apiParams.REQ_BROKER, body: { name, phone, email } });
     }
     return (
         <>
@@ -58,6 +59,10 @@ const RegisterAgent = () => {
                         <div>
                             <Label htmlFor="ph" className="pl-1 text-gray-800 pb-1 text-xs font-semibold">Enter your whatsapp number</Label>
                             <Input value={phone} onChange={e => setPhone(e.target.value)} id="ph" type="tel" placeholder="Whatsapp Number" />
+                        </div>
+                        <div>
+                            <Label htmlFor="email" className="pl-1 text-gray-800 pb-1 text-xs font-semibold">Enter your email</Label>
+                            <Input value={email} onChange={e => setEmail(e.target.value)} id="email" type="email" placeholder="Email" />
                         </div>
                     </div>
 
