@@ -1,4 +1,4 @@
-import { Property } from "./types";
+import { Inbox, Property } from "./types";
 
 export interface Request { }
 /**
@@ -98,4 +98,8 @@ export interface RequestGetAllData { }
 export interface RequestUploadUrl {
     ext: string; // extention
     size?: string;
+}
+
+export interface RequestUpdateInbox extends Inbox {
+    _id: string;
 }

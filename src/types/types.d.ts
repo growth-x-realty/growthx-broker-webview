@@ -40,10 +40,12 @@ export type Broker = {
 };
 
 export type Inbox = {
+    _id?: string;
     type: InboxTypes;
     name: string;
     phone: string;
     email: string;
+    remarks?: string;
 };
 
 //================= Property ===================

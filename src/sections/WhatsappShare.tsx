@@ -183,8 +183,10 @@ export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
                     <Textarea
                         value={whatsappMessage}
                         readOnly
-                        className="max-h-[55vh] text-sm font-mono resize-none"
+                        className="w-full max-h-[55vh] resize-none text-sm font-mono overflow-auto break-all whitespace-pre-wrap"
+                        style={{ wordBreak: "break-word", overflowWrap: "break-word" }}
                     />
+
                 </div>
             </div>
             <DialogFooter className="gap-2">

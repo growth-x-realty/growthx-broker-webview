@@ -81,6 +81,10 @@ export interface ResponseUpdateProperty extends SuccessResponse {
 
 }
 
+export interface ResponseUpdateInbox extends SuccessResponse {
+
+}
+
 export interface ResponseGetAdminData extends SuccessResponse {
     properties: Property[];
     leads: Lead[];
