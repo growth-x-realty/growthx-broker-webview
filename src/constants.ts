@@ -3,6 +3,7 @@ import type { ApiParams } from '../types'
 export const enums = {
     token: "token",
     name: "name",
+    phone: "phone"
 }
 export const nav = {
     root: "/",

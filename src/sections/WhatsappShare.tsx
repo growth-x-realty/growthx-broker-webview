@@ -4,6 +4,7 @@ import type { Property, PropertyDetails } from "@/types/types";
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { enums } from "@/constants";
 
 
 interface WhatsAppShareDialogProps {
@@ -127,9 +128,10 @@ export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
         }
 
         // Contact
-        if (details.contactNo) {
+        let contactNo = window.localStorage.getItem(enums.phone);
+        if (contactNo) {
             message += `📞 *CONTACT:*\n`;
-            message += `${details.contactNo}\n\n`;
+            message += `${contactNo}\n\n`;
         }
 
         message += `💬 Interested? Let's discuss!`;

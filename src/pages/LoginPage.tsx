@@ -57,6 +57,7 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
         },
         onSuccess: (data: ResponseOtpWhatsapp) => {
             window.localStorage.setItem('login', JSON.stringify({ phone, hash: data.hash }));
+            window.localStorage.setItem(enums.phone, phone);
             // toast.success(`${msgs.req_otp_success} ${phone}`);
             toast.success(`OTP sent to your registered email`);
             next();
