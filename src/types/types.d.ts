@@ -98,6 +98,9 @@ export type PropertyDetails = {
     clubhouseGymPool?: boolean;
     childrensPlayArea?: boolean;
     communityHall?: boolean;
+
+    // misc 
+    avilableUnits?: string;
 }
 
 export type Property = {

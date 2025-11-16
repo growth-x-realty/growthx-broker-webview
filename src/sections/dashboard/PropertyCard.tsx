@@ -390,6 +390,13 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                                     </span>
                                 </div>
                             )}
+                            {/* Handover Date */}
+                            {details.avilableUnits &&
+                                <div className="flex justify-between">
+                                    <span className="text-muted-foreground">Available Units:</span>
+                                    <span>{details.avilableUnits}</span>
+                                </div>
+                            }
                         </CollapsibleContent>
                     </Collapsible>
                 </CardContent>
