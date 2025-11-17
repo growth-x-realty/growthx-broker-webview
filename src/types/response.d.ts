@@ -19,6 +19,7 @@ export interface ResponseBeBroker extends SuccessResponse {
 
 export interface ResponseOtpWhatsapp extends SuccessResponse {
     hash: string;
+    phone: string;
 }
 
 export interface ResponseLoginWithOtp extends SuccessResponse {

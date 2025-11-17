@@ -14,7 +14,8 @@ export interface RequestBeBroker extends Request {
 }
 
 export interface RequestOtpWhatsapp extends Request {
-    phone: string;
+    // phone: string;
+    email: string;
 }
 
 export interface RequestLoginWithOtp extends Request {

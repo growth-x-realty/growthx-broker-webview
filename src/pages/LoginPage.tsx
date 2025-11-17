@@ -4,7 +4,7 @@ import { InputOTP, InputOTPSlot } from "@/components/ui/input-otp"
 import { Label } from "@/components/ui/label"
 import type { ErrorResponse, ResponseLoginWithOtp, ResponseOtpWhatsapp } from "@/types/response"
 import { useMutation } from "@tanstack/react-query"
-import { ChevronLeft, MessageCircleCode } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { apiParams, enums, msgs, nav } from '@/constants'
@@ -46,7 +46,8 @@ const LoginPage = () => {
 }
 
 const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
-    const [phone, setPhone] = useState("");
+    // const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
     const [error, setError] = useState<Record<string, string>>({});
 
     const navigate = useNavigate();
@@ -56,43 +57,45 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
             toast.error(error.message);
         },
         onSuccess: (data: ResponseOtpWhatsapp) => {
-            window.localStorage.setItem('login', JSON.stringify({ phone, hash: data.hash }));
-            window.localStorage.setItem(enums.phone, phone);
-            // toast.success(`${msgs.req_otp_success} ${phone}`);
-            toast.success(`OTP sent to your registered email`);
+            window.localStorage.setItem('login', JSON.stringify({ phone: data.phone, hash: data.hash }));
+            window.localStorage.setItem(enums.phone, data.phone);
+            toast.success(`otp sent on ${email}`);
             next();
         }
     })
     const mutateHandler = () => {
-        if (!phone) {
-            setError({ phone: "Phone is required" })
+        if (!email) {
+            setError({ phone: "Email is required" })
             return;
         }
 
-        requestOtpWhatsapp({ apiParam: apiParams.REQ_WH_OTP, body: { phone } });
+        requestOtpWhatsapp({ apiParam: apiParams.REQ_WH_OTP, body: { email } });
     }
 
     return (<>
-        <div className="pt-10 pb-6">
+        <div className="pt-10 pb-3">
             <InputField
-                label="Enter your registered phone"
+                label="Enter your registered email"
                 name="phone"
-                onChange={val => setPhone(val)}
-                value={phone}
-                type="tel"
-                placeholder="Whatsapp Number"
+                onChange={val => setEmail(val)}
+                value={email}
+                type="email"
+                placeholder="you@example.com"
                 error={error}
             />
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
             <Button disabled={isPending} onClick={mutateHandler}>
                 {
                     !isPending ?
-                        <><MessageCircleCode />Get OTP on email</>
+                        <>Next</>
                         : "Sending OTP ..."
                 }
             </Button>
+            <div className="text-center text-slate-400">
+                ---- or ----
+            </div>
             <Button variant={"secondary"} onClick={() => navigate(nav.register)}>Register as an Agent</Button>
         </div >
     </>)
