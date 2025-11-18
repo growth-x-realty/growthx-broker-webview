@@ -38,5 +38,6 @@ export const _Area = {
     Begumpet: "Begumpet",
     Ameerpet: "Ameerpet",
     Secunderabad: "Secunderabad",
-    Somajiguda: "Somajiguda"
+    Somajiguda: "Somajiguda",
+    Kollur: "Kollur"
 }
