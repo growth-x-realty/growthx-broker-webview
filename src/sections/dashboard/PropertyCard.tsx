@@ -41,6 +41,13 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
 
 
     const details = property.p_details as PropertyDetails;
+    // to maintain backward compatiblity with string type.
+    let _units = details.avilableUnits;
+    if (_units) {
+        if (typeof _units == 'string') {
+            _units = [_units]
+        }
+    }
     return (
         <>
             <Card className="w-full max-w-sm mx-auto overflow-hidden py-0">
@@ -395,13 +402,20 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                                     </span>
                                 </div>
                             )}
-                            {/* Handover Date */}
-                            {details.avilableUnits &&
-                                <div className="flex justify-between">
-                                    <span className="text-muted-foreground">Available Units:</span>
-                                    <span>{details.avilableUnits}</span>
+
+                            {/* available units */}
+                            {_units && _units.length > 0 && (
+                                <div>
+                                    <h4 className="font-medium mb-2">Available Units: {_units.length}</h4>
+                                    <div className="flex flex-wrap gap-1">
+                                        {_units.map((units, index) => (
+                                            <p key={index} className="text-sm border rounded-md p-1.5 w-full">
+                                                {units}
+                                            </p>
+                                        ))}
+                                    </div>
                                 </div>
-                            }
+                            )}
                         </CollapsibleContent>
                     </Collapsible>
                 </CardContent>

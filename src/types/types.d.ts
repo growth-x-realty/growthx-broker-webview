@@ -100,7 +100,7 @@ export type PropertyDetails = {
     communityHall?: boolean;
 
     // misc 
-    avilableUnits?: string;
+    avilableUnits?: string[];
 }
 
 export type Property = {
