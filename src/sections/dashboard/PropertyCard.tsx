@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useStoreProperty } from "@/state/store";
 import type { PropertyDetails } from "@/types/types";
-import { ArrowUpRight, Building, Calendar, Car, ChevronDown, ChevronUp, Dumbbell, Home, MapPin, Proportions, Ratio, Share, Shield, UserPlus, Users } from "lucide-react";
+import { ArrowUpRight, Building, Calendar, Car, ChevronDown, ChevronUp, Dumbbell, Home, MapPin, Ratio, Share, Shield, UserPlus, Users } from "lucide-react";
 import { useState } from "react";
 import { WhatsAppShareDialog } from "../WhatsappShare";
 import { Separator } from "@/components/ui/separator";
@@ -90,7 +90,7 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                             }
                             {details.landSizeSqYard &&
                                 <span className="flex items-center text-sm text-muted-foreground">
-                                    <Proportions className="w-4 h-4 mr-1" />Land Size {details.landSizeSqYard} sq yd
+                                    | Land Size {details.landSizeSqYard} sq yd
                                 </span>
                             }
                         </div>
