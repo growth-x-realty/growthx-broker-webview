@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useStoreProperty } from "@/state/store";
 import type { PropertyDetails } from "@/types/types";
-import { ArrowUpRight, Building, Calendar, Car, ChevronDown, ChevronUp, Dumbbell, Home, LandPlot, MapPin, Proportions, Ratio, Share, Shield, Square, UserPlus, Users } from "lucide-react";
+import { ArrowUpRight, Building, Calendar, Car, ChevronDown, ChevronUp, Dumbbell, Home, MapPin, Proportions, Ratio, Share, Shield, UserPlus, Users } from "lucide-react";
 import { useState } from "react";
 import { WhatsAppShareDialog } from "../WhatsappShare";
 import { Separator } from "@/components/ui/separator";
