@@ -107,9 +107,16 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                     {details.priceAvailable && details.totalPrice && (
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-xl font-semibold text-primary">
-                                    {formatPrice(details.totalPrice)}
-                                </p>
+                                <div className="flex gap-8 items-center">
+                                    <p className="text-xl font-semibold text-primary">
+                                        {formatPrice(details.totalPrice)}
+                                    </p>
+                                    {details.paymentType && (
+                                        <div className="flex justify-between">
+                                            <span className="text-muted-foreground">Payment Type : <span className="text-slate-600">{details.paymentType}</span></span>
+                                        </div>
+                                    )}
+                                </div>
                                 {details.perSqFtRate && (
                                     <p className="text-sm text-muted-foreground">
                                         ₹{details.perSqFtRate}/sq ft
