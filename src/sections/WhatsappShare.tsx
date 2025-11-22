@@ -90,6 +90,9 @@ export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
             if (details.perSqFtRate) {
                 message += `• Rate: ₹${details.perSqFtRate}/sq ft\n`;
             }
+            if (details.paymentType) {
+                message += `• Payment Type: ${details.paymentType}\n`;
+            }
             message += `\n`;
         }
 
