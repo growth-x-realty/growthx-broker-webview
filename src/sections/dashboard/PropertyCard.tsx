@@ -320,6 +320,12 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                                                 <span>₹{details.corpus.toLocaleString()}</span>
                                             </div>
                                         )}
+                                        {details.paymentType && (
+                                            <div className="flex justify-between">
+                                                <span className="text-muted-foreground">Payment Type:</span>
+                                                <span>{details.paymentType}</span>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             )}

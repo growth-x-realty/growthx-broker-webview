@@ -87,6 +87,7 @@ export type PropertyDetails = {
     perSqFtRate?: number;
     floorRiseCharges?: number;
     corpus?: number;
+    paymentType?: "OTP" | "LOAN";
 
     // Amenities Details
     amenities?: string[];
