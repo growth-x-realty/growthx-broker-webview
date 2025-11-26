@@ -62,7 +62,7 @@ const DashboardPage = () => {
             <div className='py-4 px-3'>
                 {/* title */}
                 <h1 className='text-2xl font-extrabold tracking-tight'>{window.localStorage.getItem('name')}</h1>
-                <h1 className='text-slate-700 text-sm'>Discover Lucrative Property</h1>
+                <h1 className='text-slate-700 text-sm'>Discover Lucrative Investor’s Property</h1>
 
                 {/* search */}
                 <PropertyFilter search={search} setSearch={setSearch} />
