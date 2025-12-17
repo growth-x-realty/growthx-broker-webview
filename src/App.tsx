@@ -11,6 +11,7 @@ import {
 import { Toaster } from "sonner";
 import { nav } from "./constants";
 import ContactUs from "./pages/ContactUsPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
   { path: nav.dashboard, element: <DashboardPage /> },
   { path: nav.register, element: <RegisterAgent /> },
   { path: nav.contactus, element: <ContactUs /> },
+  { path: nav.privacyPolicy, element: <PrivacyPolicy /> }
 
 ]);
 

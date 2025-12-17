@@ -12,7 +12,8 @@ export const nav = {
     register: "/register",
     dashboard: "/dashboard",
     contactus: "/contact-us",
-    aboutus: "/about-us"
+    aboutus: "/about-us",
+    privacyPolicy: "/privacy-policy"
 };
 
 export const query_key = {
