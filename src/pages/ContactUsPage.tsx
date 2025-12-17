@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Navbar from "@/sections/Navbar";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Trash } from "lucide-react";
 
 export default function ContactUs() {
     const handleSubmit = (e: React.FormEvent) => {
@@ -131,6 +131,24 @@ export default function ContactUs() {
                         <p className="text-sm text-muted-foreground">
                             We typically respond within 24 hours during business days.
                         </p>
+                    </CardContent>
+                </Card>
+
+                {/* Account Deletion */}
+                <Card className="bg-muted/50">
+                    <CardContent className="p-4 text-center space-y-3">
+                        <p className="text-sm text-muted-foreground">
+                            Account deletion will be processed within 24 hours. This action is permanent and cannot be undone.
+                        </p>
+
+                        <Button
+                            variant="destructive"
+                            className="w-full"
+                            size="lg"
+                        >
+                            <Trash className="h-4 w-4 mr-2" />
+                            Delete My Account
+                        </Button>
                     </CardContent>
                 </Card>
             </div>
