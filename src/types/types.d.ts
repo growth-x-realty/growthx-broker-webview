@@ -52,7 +52,7 @@ export type Inbox = {
 
 export type PropertyDetails = {
     // Property Details
-    propertyType?: "Flat" | "Villa";
+    propertyType?: "Flat" | "Villa" | "Plot";
     builderName?: string;
     contactNo?: string;
     builtUpAreaSqFt?: number;
@@ -64,6 +64,7 @@ export type PropertyDetails = {
     handoverDate?: Date;
     images?: string;
     googleMapLocation?: string;
+    viewBrochure?: string; // url
 
     // Flat Details
     communityType?: string;
@@ -81,6 +82,13 @@ export type PropertyDetails = {
     homeTheater?: boolean;
     liftProvision?: boolean;
 
+    // Plot Details
+    totalPlots?: number;
+    totalProjectArea?: number;
+    plotGatedCommunity?: boolean;
+    plotSize?: number;
+    plotFacing?: string;
+
     // Pricing Details
     priceAvailable?: boolean;
     totalPrice?: number;
@@ -88,6 +96,8 @@ export type PropertyDetails = {
     floorRiseCharges?: number;
     corpus?: number;
     paymentType?: "OTP" | "LOAN";
+    // plot specific pricing details
+    perSqYdRate?: number;
 
     // Amenities Details
     amenities?: string[];

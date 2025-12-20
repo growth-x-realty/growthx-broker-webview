@@ -81,7 +81,7 @@ const DashboardPage = () => {
                             res.properties.filter((prop) => {
                                 if (search == "") return true;
 
-                                if ((prop.name + ' ' + prop.addr + ' ').toLowerCase().includes(search.toLowerCase())) {
+                                if ((prop.name + ' ' + prop.addr + ' ' + prop.area + ' ' + prop.p_details.propertyType).toLowerCase().includes(search.toLowerCase())) {
                                     return true;
                                 }
                                 return false;

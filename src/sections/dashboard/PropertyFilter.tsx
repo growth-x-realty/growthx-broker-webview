@@ -19,7 +19,7 @@ const PropertyFilter = ({ search, setSearch }: { search: string, setSearch: (val
                 </SelectContent>
             </Select>
             {/* search */}
-            <Input className='border-0 shadow-none text-sm' placeholder='Type name or address ...'
+            <Input className='border-0 shadow-none text-sm' placeholder='Search Name/ Address / Type'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />

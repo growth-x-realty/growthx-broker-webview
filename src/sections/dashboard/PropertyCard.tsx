@@ -16,9 +16,9 @@ import { AddInterested } from "./AddInterested";
 
 const getStatusBadgeColor = (status: string) => {
     switch (status) {
-        case "OPEN": return "bg-green-500";
-        case "PROGRESS": return "bg-yellow-500";
-        case "SOLD": return "bg-red-500";
+        case "Ready to Move": return "bg-green-500";
+        case "Under Construction": return "bg-yellow-500";
+        case "Pre launch": return "bg-red-300";
         default: return "bg-gray-500";
     }
 };
@@ -69,15 +69,22 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                     )}
 
                     {/* Status Badge */}
-                    <Badge className={`absolute top-2 right-2 ${getStatusBadgeColor(property.p_status)} text-white`}>
-                        {property.p_status}
-                    </Badge>
+                    {
+                        (details.possessionStatus) &&
+                        <Badge className={`absolute top-2 right-2 ${getStatusBadgeColor(details.possessionStatus)} text-white`}>
+                            {details.possessionStatus}
+                        </Badge>
+                    }
                 </div>
 
                 <CardContent className="p-4 space-y-3">
                     {/* Builder and Property Name */}
                     <div>
-                        <h3 className="font-medium text-lg">{property.name}</h3>
+                        <div className="flex items-center justify-between">
+                            <h3 className="font-medium text-lg">{property.name} </h3>
+                            <p className="text-sm font-semibold text-gray-600">{details.propertyType}</p>
+                        </div>
+
                         {property.name && (
                             <p className="text-muted-foreground">{details.builderName}</p>
                         )}
@@ -98,6 +105,11 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                             {details.landSizeSqYard &&
                                 <span className="flex items-center text-sm text-muted-foreground">
                                     | Land Size {details.landSizeSqYard} sq yd
+                                </span>
+                            }
+                            {details.plotSize &&
+                                <span className="flex items-center text-sm text-muted-foreground">
+                                    | Plot Size {details.plotSize} sq yd
                                 </span>
                             }
                         </div>
@@ -208,7 +220,12 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                         <CollapsibleContent className="space-y-4 pt-4">
                             {/* Property Specifications */}
                             <div>
-                                <h4 className="font-medium mb-2">Property Details</h4>
+                                <div className="flex justify-between items-center">
+                                    <h4 className="font-medium mb-2">Property Details</h4>
+                                    {details.viewBrochure &&
+                                        <a target="_blank" href={details.viewBrochure} className='text-muted-foreground text-xs border rounded-2xl px-2 py-1 flex border-muted-foreground items-center w-fit'> View Brochure <ArrowUpRight size={13} /></a>
+                                    }
+                                </div>
                                 <div className="grid grid-cols-1 gap-2 text-sm">
                                     {details.facing &&
                                         <div className="flex justify-between">
