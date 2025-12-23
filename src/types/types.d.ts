@@ -23,6 +23,7 @@ export type Lead = {
     name: string;
     status: "WAITING" | "PROGRESS" | "SOLD";
     price: number;
+    comments?: string;
 };
 
 export type PropertyLead = {

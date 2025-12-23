@@ -52,6 +52,7 @@ export interface RequestAddLead {
     p_id: string;
     name: string;
     price: number;
+    comments?: string;
 }
 
 export interface RequestLogout {

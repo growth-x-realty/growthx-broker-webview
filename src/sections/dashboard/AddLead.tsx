@@ -30,6 +30,7 @@ export const AddLead = ({ p_id, exp_price }: { p_id: string, exp_price: number }
 const StepNew = ({ next, p_id, exp_price }: { next: () => void, p_id: string, exp_price: number }) => {
     const [name, setName] = useState("");
     const [offer, setOffer] = useState("");
+    const [comment, setComment] = useState("");
     const [error, setError] = useState({});
     const addLead = useStoreLead((s) => s.addLead);
 
@@ -39,7 +40,7 @@ const StepNew = ({ next, p_id, exp_price }: { next: () => void, p_id: string, ex
             toast.error(error.message);
         },
         onSuccess: (data) => {
-            addLead({ _id: data.l_id, name, price: Number(offer), p_id, status: "WAITING" });
+            addLead({ _id: data.l_id, name, price: Number(offer), p_id, status: "WAITING", comments: comment });
             next();
         }
     })
@@ -65,7 +66,7 @@ const StepNew = ({ next, p_id, exp_price }: { next: () => void, p_id: string, ex
             return;
         }
 
-        requestAddLead({ apiParam: apiParams.ADD_LEAD, body: { name, p_id, price: Number(offer) } });
+        requestAddLead({ apiParam: apiParams.ADD_LEAD, body: { name, p_id, price: Number(offer), comments: comment } });
     }
 
     return (<>
@@ -91,6 +92,13 @@ const StepNew = ({ next, p_id, exp_price }: { next: () => void, p_id: string, ex
                     onChange={(val) => setOffer(val)}
                     error={error}
                     placeholder="Rs."
+                />
+                <InputField
+                    label="Comment"
+                    name="comment"
+                    value={comment}
+                    onChange={(val) => setComment(val)}
+                    error={error}
                 />
             </div>
             <DrawerFooter>
