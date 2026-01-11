@@ -52,12 +52,12 @@ const LoginPage = () => {
                 <div className="bg-white rounded-lg border shadow-sm p-4">
                     <Tabs value={tab} onValueChange={setTab}>
                         <TabsList className="w-full mb-3">
-                            <TabsTrigger value="broker">Broker</TabsTrigger>
+                            <TabsTrigger value="broker">Sell Partner</TabsTrigger>
                             <TabsTrigger value="investor">Investor</TabsTrigger>
                         </TabsList>
                         <TabsContent value="broker">
                             <div className="text-center">
-                                <p className="text-xl text-yellow-600"><span className="font-semibold">Growthx </span> | Broker</p>
+                                <p className="text-xl text-yellow-600"><span className="font-semibold">Growthx </span> | Sell Partner</p>
                                 <p className="text-sm text-slate-600">Sign in to your account</p>
                             </div>
                             {
@@ -131,7 +131,7 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
             <div className="text-center text-slate-400">
                 ---- or ----
             </div>
-            <Button variant={"secondary"} onClick={() => navigate(nav.register)}>Register as an Agent</Button>
+            <Button variant={"secondary"} onClick={() => navigate(nav.register)}>Register as partner</Button>
         </div >
     </>)
 }
