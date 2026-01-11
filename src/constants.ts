@@ -3,7 +3,11 @@ import type { ApiParams } from '../types'
 export const enums = {
     token: "token",
     name: "name",
-    phone: "phone"
+    phone: "phone",
+    investor_login: "_investor_login",
+    investor_email: "_investor_email",
+    investor_token: "_investor_token",
+    loginAs: "_loginAs"
 }
 export const nav = {
     root: "/",
