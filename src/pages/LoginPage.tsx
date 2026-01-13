@@ -131,7 +131,7 @@ const StepPhone = ({ next }: { next: () => void; prev: () => void; }) => {
             <div className="text-center text-slate-400">
                 ---- or ----
             </div>
-            <Button variant={"secondary"} onClick={() => navigate(nav.register)}>Register as partner</Button>
+            <Button variant={"secondary"} onClick={() => navigate(nav.register)}>Register as sell partner</Button>
         </div >
     </>)
 }

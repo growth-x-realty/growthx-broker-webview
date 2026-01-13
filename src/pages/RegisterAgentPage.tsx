@@ -48,7 +48,7 @@ const RegisterAgent = () => {
                 <div className="bg-white rounded-lg border shadow-sm p-4">
                     <div className="text-center">
                         <p className="text-xl"><span className="font-semibold">Growthx </span> | Sell Partner</p>
-                        <p className="text-sm text-slate-600">Register as partner</p>
+                        <p className="text-sm text-slate-600">Register as sell partner</p>
                     </div>
 
                     <div className="pt-10 pb-6 flex flex-col gap-4">
