@@ -38,7 +38,7 @@ const GuestPage = () => {
         <>
             {/* Custom Simple Navbar for Guest */}
             <nav className='bg-primary/5 flex justify-between items-center p-4 border-b border-slate-100'>
-                <p className="text-lg text-slate-900"><span className='font-bold'>Growthx</span> | Broker</p>
+                <p className="text-lg text-slate-900"><span className='font-bold'>Growthx</span></p>
                 <Button
                     onClick={() => navigate(nav.login)}
                     variant="default"

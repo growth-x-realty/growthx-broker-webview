@@ -6,14 +6,14 @@ const PrivacyPolicy = () => {
                 {/* Header */}
                 <div className="mb-8">
                     <h1 className="mb-2">Privacy Policy</h1>
-                    <p className="text-xl text-gray-600 mb-1">GrowthX Realty – Broker App</p>
+                    <p className="text-xl text-gray-600 mb-1">GrowthX Realty – Sell Partner App</p>
                     <p className="text-sm text-gray-500">Last updated: 20 December 2025</p>
                 </div>
 
                 {/* Introduction */}
                 <div className="mb-8 leading-relaxed text-gray-700">
                     <p>
-                        GrowthX Realty ("we", "our", or "us") operates the GrowthX Realty Broker App (the "App"),
+                        GrowthX Realty ("we", "our", or "us") operates the GrowthX Realty Sell Partner App (the "App"),
                         available on Android and Apple platforms. This Privacy Policy explains how information is
                         handled when you use our App.
                     </p>
@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
                 <section className="mb-8">
                     <h2 className="mb-4">1. Overview</h2>
                     <p className="text-gray-700 leading-relaxed mb-4">
-                        The GrowthX Realty Broker App is primarily a view-only application designed for existing
+                        The GrowthX Realty Sell Partner App is primarily a view-only application designed for existing
                         GrowthX Realty clients to view and track their investment portfolio.
                     </p>
                     <p className="text-gray-700 leading-relaxed">

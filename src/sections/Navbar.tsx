@@ -29,7 +29,7 @@ const Navbar = () => {
     }
     return (
         <nav className='bg-primary/30 flex justify-between p-3'>
-            <p ><span className='font-semibold'>Growthx</span> | Broker</p>
+            <p ><span className='font-semibold'>Growthx</span> | Sell Partner</p>
             <Drawer direction='top'>
                 <DrawerTrigger asChild>
                     <Menu />
@@ -37,7 +37,7 @@ const Navbar = () => {
                 <DrawerContent aria-describedby='navbar'>
                     <DialogTitle>
                         <div className='bg-primary/30 flex justify-between p-3'>
-                            <p ><span className='font-semibold'>Growthx</span> | Broker</p>
+                            <p ><span className='font-semibold'>Growthx</span> | Sell Partner</p>
                             <DrawerClose asChild>
                                 <X />
                             </DrawerClose>
