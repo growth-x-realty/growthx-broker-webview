@@ -23,6 +23,8 @@ const Navbar = () => {
         }
     })
     const mutationHandler = () => {
+        window.localStorage.clear();
+        navigate(nav.root);
         requestLogout({ apiParam: apiParams.LOGOUT, body: {} })
     }
     return (

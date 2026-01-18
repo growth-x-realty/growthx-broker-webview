@@ -10,7 +10,7 @@ export type SuccessResponse = {
  */
 
 export interface ResponseGetAllProperties extends SuccessResponse {
-    //TODO
+    properties: Property[];
 }
 
 export interface ResponseBeBroker extends SuccessResponse {

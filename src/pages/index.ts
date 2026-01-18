@@ -1,5 +1,5 @@
 import DashboardPage from "./DashboardPage";
 import LoginPage from "./LoginPage";
 import RegisterAgent from "./RegisterAgentPage";
-RegisterAgent
-export { DashboardPage, LoginPage, RegisterAgent }
+import GuestPage from "./GuestPage";
+export { DashboardPage, LoginPage, RegisterAgent, GuestPage }

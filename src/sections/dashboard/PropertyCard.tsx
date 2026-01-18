@@ -32,7 +32,7 @@ const formatPrice = (price: number) => {
     return `₹${price.toLocaleString()}`;
 };
 
-const PropertyCard = ({ p_id }: { p_id: string }) => {
+const PropertyCard = ({ p_id, isGuest = false }: { p_id: string; isGuest?: boolean }) => {
     const [isExpanded, setIsExpanded] = useState<"LEAD" | "DETAILS" | "NONE">("NONE");
 
     const property = useStoreProperty(s => s.data.get(p_id));
@@ -115,13 +115,13 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                         </div>
                     </div>
 
-                    {/* Price */}
+                    {/* Price with 2% increase for guests */}
                     {details.priceAvailable && details.totalPrice && (
                         <div className="flex items-center justify-between">
                             <div>
                                 <div className="flex gap-8 items-center">
                                     <p className="text-xl font-semibold text-primary">
-                                        {formatPrice(details.totalPrice)}
+                                        {formatPrice(isGuest ? Math.round(details.totalPrice * 1.02) : details.totalPrice)}
                                     </p>
                                     {details.paymentType && (
                                         <div className="flex justify-between">
@@ -131,7 +131,7 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                                 </div>
                                 {details.perSqFtRate && (
                                     <p className="text-sm text-muted-foreground">
-                                        ₹{details.perSqFtRate}/sq ft
+                                        ₹{(isGuest ? Math.round(details.perSqFtRate * 1.02) : details.perSqFtRate).toLocaleString()}/sq ft
                                     </p>
                                 )}
                             </div>
@@ -150,18 +150,20 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                     {/* Action Buttons */}
                     <div className="flex gap-2">
                         {/* ----------- Add Lead */}
-                        <Drawer>
-                            <DrawerTrigger asChild>
-                                <Button
-                                    className="flex-1"
-                                >
-                                    <UserPlus />Add Lead
-                                </Button>
-                            </DrawerTrigger>
-                            <DrawerContent aria-describedby="add lead">
-                                <AddLead p_id={p_id} exp_price={details.totalPrice || 0} />
-                            </DrawerContent>
-                        </Drawer>
+                        {!isGuest && (
+                            <Drawer>
+                                <DrawerTrigger asChild>
+                                    <Button
+                                        className="flex-1"
+                                    >
+                                        <UserPlus />Add Lead
+                                    </Button>
+                                </DrawerTrigger>
+                                <DrawerContent aria-describedby="add lead">
+                                    <AddLead p_id={p_id} exp_price={details.totalPrice || 0} />
+                                </DrawerContent>
+                            </Drawer>
+                        )}
 
 
                         {/* ---------- Whatsapp Share */}
@@ -179,24 +181,28 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                         </Dialog>
 
                         {/* ---------- Add Interested */}
-                        <AddInterested p_id={property._id} />
+                        {!isGuest && (
+                            <AddInterested p_id={property._id} />
+                        )}
                     </div>
 
                     <Separator />
 
                     <div className="flex gap-4">
-                        <Button
-                            onClick={() => setIsExpanded(pre => (pre == "LEAD") ? "NONE" : "LEAD"
-                            )}
-                            variant={isExpanded == "LEAD" ? "secondary" : "outline"}
-                            className="justify-between flex-1">
-                            My Leads
-                            {isExpanded == "LEAD" ? (
-                                <ChevronUp className="w-4 h-4" />
-                            ) : (
-                                <ChevronDown className="w-4 h-4" />
-                            )}
-                        </Button>
+                        {!isGuest && (
+                            <Button
+                                onClick={() => setIsExpanded(pre => (pre == "LEAD") ? "NONE" : "LEAD"
+                                )}
+                                variant={isExpanded == "LEAD" ? "secondary" : "outline"}
+                                className="justify-between flex-1">
+                                My Leads
+                                {isExpanded == "LEAD" ? (
+                                    <ChevronUp className="w-4 h-4" />
+                                ) : (
+                                    <ChevronDown className="w-4 h-4" />
+                                )}
+                            </Button>
+                        )}
                         <Button onClick={() => setIsExpanded(pre => (pre == "DETAILS") ? "NONE" : "DETAILS"
                         )}
                             variant={isExpanded == "DETAILS" ? "secondary" : "outline"}
@@ -323,13 +329,13 @@ const PropertyCard = ({ p_id }: { p_id: string }) => {
                                         {details.totalPrice && (
                                             <div className="flex justify-between">
                                                 <span className="text-muted-foreground">Total Price:</span>
-                                                <span>₹{details.totalPrice.toLocaleString()}</span>
+                                                <span>₹{(isGuest ? Math.round(details.totalPrice * 1.02) : details.totalPrice).toLocaleString()}</span>
                                             </div>
                                         )}
                                         {details.perSqFtRate && (
                                             <div className="flex justify-between">
                                                 <span className="text-muted-foreground">per sqft rate:</span>
-                                                <span>₹{details.perSqFtRate.toLocaleString()}</span>
+                                                <span>₹{(isGuest ? Math.round(details.perSqFtRate * 1.02) : details.perSqFtRate).toLocaleString()}</span>
                                             </div>
                                         )}
                                         {details.floorRiseCharges && (

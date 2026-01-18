@@ -11,6 +11,16 @@ interface WhatsAppShareDialogProps {
     property: Property;
 }
 
+export function addPercent(value: number, percent: number): number {
+    const v = Number(value);
+    const p = Number(percent);
+    if (!Number.isFinite(v) || !Number.isFinite(p)) {
+        // throw new TypeError("value and percent must be finite numbers");
+        return value;
+    }
+    const result = v * (1 + p / 100);
+    return Math.round(result * 100) / 100;
+}
 export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
     const [copied, setCopied] = useState(false);
 
@@ -86,9 +96,9 @@ export function WhatsAppShareDialog({ property }: WhatsAppShareDialogProps) {
         // Pricing
         if (details.priceAvailable && details.totalPrice) {
             message += `💰 *PRICE:*\n`;
-            message += `• Total Price: ${formatPrice(details.totalPrice)}\n`;
+            message += `• Total Price: ${formatPrice(addPercent(details.totalPrice, 2))}\n`;
             if (details.perSqFtRate) {
-                message += `• Rate: ₹${details.perSqFtRate}/sq ft\n`;
+                message += `• Rate: ₹${addPercent(details.perSqFtRate, 2)}/sq ft\n`;
             }
             if (details.paymentType) {
                 message += `• Payment Type: ${details.paymentType}\n`;

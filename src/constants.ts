@@ -17,7 +17,8 @@ export const nav = {
     dashboard: "/dashboard",
     contactus: "/contact-us",
     aboutus: "/about-us",
-    privacyPolicy: "/privacy-policy"
+    privacyPolicy: "/privacy-policy",
+    guest: "/guest"
 };
 
 export const query_key = {
@@ -71,6 +72,10 @@ export const apiParams = {
         url: BASE_URL + 'logout',
         method: "POST",
         auth: true
+    } as ApiParams,
+    GET_ALL_PROPERTIES: {
+        url: BASE_URL + 'get-all-properties',
+        method: "GET"
     } as ApiParams,
 }
 

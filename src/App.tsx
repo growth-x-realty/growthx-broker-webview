@@ -1,4 +1,4 @@
-import { DashboardPage, LoginPage, RegisterAgent } from "./pages"
+import { DashboardPage, GuestPage, LoginPage, RegisterAgent } from "./pages"
 import {
   Navigate,
   RouterProvider,
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
     element: <Navigate to={nav.login} replace />
   },
   { path: nav.login, element: <LoginPage /> },
+  { path: nav.guest, element: <GuestPage /> },
   { path: nav.dashboard, element: <DashboardPage /> },
   { path: nav.register, element: <RegisterAgent /> },
   { path: nav.contactus, element: <ContactUs /> },

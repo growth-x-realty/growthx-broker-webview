@@ -42,5 +42,7 @@ export const _Area = {
     Kollur: "Kollur",
     Nandigaon: "Nandigaon",
     kardanpur: "kardanpur",
-    velimala: "velimala"
+    velimala: "velimala",
+    beeramguda: "Beeramguda",
+    Shankarpalle: "Shankarpalle"
 }

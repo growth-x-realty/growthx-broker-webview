@@ -21,8 +21,8 @@ export const InputField = ({
     error = {},
 }: InputFieldProps) => {
     return (
-        <div className="flex flex-col gap-1">
-            <Label htmlFor={name} className="pl-1 text-gray-800 text-xs font-semibold">
+        <div className="flex flex-col gap-2">
+            <Label htmlFor={name} className="pl-1 text-slate-500 text-xs font-semibold uppercase tracking-wider">
                 {label}
             </Label>
             <ShadcnInput
@@ -31,11 +31,12 @@ export const InputField = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
+                className="h-12 rounded-xl border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all px-4"
             />
             {error[name] && error[name] !== "" && (
-                <Label className="pl-1 text-red-800 text-xs">
+                <p className="pl-1 text-red-500 text-xs mt-1">
                     {error[name]}
-                </Label>
+                </p>
             )}
         </div>
     );
